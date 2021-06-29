@@ -2,7 +2,6 @@
 
 namespace App\Architecture\Structure\Repositories;
 
-use App\Architecture\Helpers\PaginatorHelper;
 use App\Models\ProductImage;
 
 class ProductImageRepository extends ProductImage
