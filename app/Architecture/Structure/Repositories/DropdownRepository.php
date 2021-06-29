@@ -2,6 +2,7 @@
 
 namespace App\Architecture\Structure\Repositories;
 
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Supplier;
@@ -35,6 +36,13 @@ class DropdownRepository
     {
         return Customer::select('customer.id as value', 'customer.name as text')
             ->where('customer.state', true)
+            ->get();
+    }
+
+    public function CategoryDropdown()
+    {
+        return Category::select('category.id as value', 'category.name as text')
+            ->where('category.state', true)
             ->get();
     }
 }

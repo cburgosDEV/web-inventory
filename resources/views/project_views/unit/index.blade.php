@@ -43,12 +43,12 @@
             @button-action="save">
             <div class="form-row">
                 <div class="col-md-8 mb-3">
-                    <label for="name">Unidad</label>
+                    <label for="name">Unidad:</label>
                     <input type="text" class="form-control" id="name" placeholder="Unidad" v-model="viewModel.name">
                     <span v-if="showError && validations.name !== undefined" class="text-danger font-weight-light">@{{validations.name[0]}}</span>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="symbol">Símbolo</label>
+                    <label for="symbol">Símbolo:</label>
                     <input type="text" class="form-control" id="symbol" placeholder="Símbolo" v-model="viewModel.symbol">
                     <span v-if="showError && validations.symbol !== undefined" class="text-danger font-weight-light">@{{validations.symbol[0]}}</span>
                 </div>

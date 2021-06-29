@@ -35,4 +35,9 @@ class DropdownService
     {
         return $this->dropdownRepository->CustomerDropdown();
     }
+
+    public function CategoryDropdown()
+    {
+        return $this->dropdownRepository->CategoryDropdown();
+    }
 }

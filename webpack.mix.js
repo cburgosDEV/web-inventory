@@ -24,3 +24,6 @@ mix.js('resources/js/project_scripts/purchase/index.js', 'public/js/purchase');
 
 //SALE
 mix.js('resources/js/project_scripts/sale/index.js', 'public/js/sale');
+
+//CATEGORY
+mix.js('resources/js/project_scripts/category/index.js', 'public/js/category');

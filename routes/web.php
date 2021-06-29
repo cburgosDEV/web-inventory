@@ -72,3 +72,12 @@ Route::prefix('sale')->group(function () {
     Route::get('jsonDetail/{idPurchase}', ['App\Http\Controllers\SaleController', 'jsonDetail']);
     Route::post('checkFormDetail', ['App\Http\Controllers\SaleController', 'checkFormDetail']);
 });
+
+//EXPENSE
+Route::prefix('category')->group(function () {
+    Route::get('', ['App\Http\Controllers\CategoryController', 'index']);
+    Route::get('jsonIndex/{filterText?}', ['App\Http\Controllers\CategoryController', 'jsonIndex']);
+    Route::get('jsonCreate', ['App\Http\Controllers\CategoryController', 'jsonCreate']);
+    Route::post('store', ['App\Http\Controllers\CategoryController', 'store']);
+    Route::get('jsonDetail/{idCategory}', ['App\Http\Controllers\CategoryController', 'jsonDetail']);
+});
