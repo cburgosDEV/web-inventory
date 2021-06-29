@@ -1,0 +1,11 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/unit/index.js": "/js/unit/index.js",
+    "/js/customer/index.js": "/js/customer/index.js",
+    "/js/expense/index.js": "/js/expense/index.js",
+    "/js/product/index.js": "/js/product/index.js",
+    "/js/supplier/index.js": "/js/supplier/index.js",
+    "/js/purchase/index.js": "/js/purchase/index.js",
+    "/js/sale/index.js": "/js/sale/index.js",
+    "/css/app.css": "/css/app.css"
+}
