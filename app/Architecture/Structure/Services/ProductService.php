@@ -2,8 +2,10 @@
 
 namespace App\Architecture\Structure\Services;
 
+use App\Architecture\Mappers\ProductCategoryMapper;
 use App\Architecture\Mappers\ProductImageMapper;
 use App\Architecture\Mappers\ProductMapper;
+use App\Architecture\Structure\Repositories\ProductCategoryRepository;
 use App\Architecture\Structure\Repositories\ProductImageRepository;
 use App\Architecture\Structure\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Storage;
@@ -14,19 +16,25 @@ class ProductService
     protected $productMapper;
     protected $productImageRepository;
     protected $productImageMapper;
+    protected $productCategoryRepository;
+    protected $productCategoryMapper;
 
     public function __construct
     (
         ProductRepository $productRepository,
         ProductMapper $productMapper,
         ProductImageRepository $productImageRepository,
-        ProductImageMapper $productImageMapper
+        ProductImageMapper $productImageMapper,
+        ProductCategoryRepository $productCategoryRepository,
+        ProductCategoryMapper $productCategoryMapper
     )
     {
         $this->productRepository = $productRepository;
         $this->productMapper = $productMapper;
         $this->productImageRepository = $productImageRepository;
         $this->productImageMapper = $productImageMapper;
+        $this->productCategoryRepository = $productCategoryRepository;
+        $this->productCategoryMapper = $productCategoryMapper;
     }
 
     public function getById($id)
@@ -43,16 +51,31 @@ class ProductService
     public function store($request)
     {
         $listImage = $request->get('listImage');
+        $listCategory = $request->get('listCategory');
         $listImageDelete = $request->get('listImageDelete');
+        $listCategoryDelete = $request->get('listCategoryDelete');
 
         if($request->get('id') == 0) {
+            //CREATE PRODUCT
             $model = $this->productMapper->objectRequestToModel($request->all());
             $response = $this->productRepository->store($model);
             if(!is_numeric($response->id)) return false;
-            $this->saveImage($listImage, $response->id);
+            if(count($listImage)>0){
+                //SAVE IMAGE
+                $this->saveImage($listImage, $response->id);
+            }
+            if(count($listCategory)>0){
+                //SAVE CATEGORY
+                $this->saveCategory($listCategory, $response->id);
+            }
+            if(count($listCategoryDelete)>0){
+                //DELETE CATEGORY
+                $this->deleteCategory($listCategoryDelete, $response->id);
+            }
             return is_numeric($response->id) ?? false;
         }
         else {
+            //EDIT PRODUCT
             $model = $this->productRepository->getById($request->get('id'));
             $model->fill($request->all());
             $response = $this->productRepository->store($model);
@@ -60,6 +83,14 @@ class ProductService
             if(count($listImage)>0){
                 //SAVE IMAGE
                 $this->saveImage($listImage, $request->get('id'));
+            }
+            if(count($listCategory)>0){
+                //SAVE CATEGORY
+                $this->saveCategory($listCategory, $response->id);
+            }
+            if(count($listCategoryDelete)>0){
+                //DELETE CATEGORY
+                $this->deleteCategory($listCategoryDelete, $response->id);
             }
             if(is_array($listImageDelete)){
                 //DELETE IMAGE
@@ -165,5 +196,33 @@ class ProductService
         $product = $this->productRepository->getById($idProduct);
         $product['stock'] = $product['stock'] - $quantity;
         $this->productRepository->store($product);
+    }
+
+    public function saveCategory($listCategory, $idProduct)
+    {
+        foreach ($listCategory as $category)
+        {
+            $productCategory = $this->productCategoryRepository->getByCategoryAndProduct($idProduct, $category);
+            if($productCategory==null) {
+                $productCategory = $this->productCategoryRepository->buildEmptyModel();
+                $productCategory['idCategory'] = $category;
+                $productCategory['idProduct'] = $idProduct;
+                $productCategoryModel = $this->productCategoryMapper->objectRequestToModel($productCategory);
+                $this->productCategoryRepository->store($productCategoryModel);
+            } else {
+                $productCategory['state'] = true;
+                $this->productCategoryRepository->store($productCategory);
+            }
+        }
+    }
+
+    public function deleteCategory($listCategoryDelete, $idProduct)
+    {
+        foreach ($listCategoryDelete as $category)
+        {
+            $productCategory = $this->productCategoryRepository->getByCategoryAndProduct($idProduct, $category['idCategory']);
+            $productCategory['state'] = false;
+            $this->productCategoryRepository->store($productCategory);
+        }
     }
 }

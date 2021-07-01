@@ -66,6 +66,16 @@
                     </select>
                     <span v-if="showError && validations.idUnit !== undefined" class="text-danger font-weight-light">@{{validations.idUnit[0]}}</span>
                 </div>
+                <div class="col-md-12 mb-3">
+                    <label for="idCategory">Categoría:</label>
+                    <v-select
+                        multiple
+                        :options="dropdownCategory"
+                        label="text"
+                        :reduce="item => item.value"
+                        v-model="categories">
+                    </v-select>
+                </div>
                 <div class="col-md-12 d-flex justify-content-center">
                     <vue-upload-multiple-image
                         drag-text="Arrastrar imagen"

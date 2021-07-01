@@ -7,6 +7,9 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import VueLazyload from 'vue-lazyload';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+
 
 const sweetAlertOptions = {
     title: 'Estás seguro(a)?',
@@ -31,6 +34,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('customCard', require('./components/CustomCardComponent.vue').default);
 Vue.component('searchBar', require('./components/SearchBarComponent.vue').default);
 Vue.component('customModal', require('./components/CustomModalComponent.vue').default);
+Vue.component('v-select', vSelect)
 
 window.showToast = function (type, text) {
     Vue.$toast.open({

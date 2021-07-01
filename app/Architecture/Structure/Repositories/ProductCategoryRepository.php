@@ -23,6 +23,14 @@ class ProductCategoryRepository extends ProductCategory
             ->first();
     }
 
+    public function getByCategoryAndProduct($idProduct, $idCategory)
+    {
+        return ProductCategoryRepository::select('product_category.*')
+            ->where('product_category.idProduct', $idProduct)
+            ->where('product_category.idCategory', $idCategory)
+            ->first();
+    }
+
     public function store(ProductCategory $productCategory)
     {
         if($productCategory->id == 0) {
