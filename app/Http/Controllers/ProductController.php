@@ -36,7 +36,8 @@ class ProductController
         return response()->json(
             [
                 'viewModel' => $this->productService->getById(0),
-                'dropdownUnit' => $this->dropdownService->UnitDropdown()
+                'dropdownUnit' => $this->dropdownService->UnitDropdown(),
+                'dropdownCategory' => $this->dropdownService->CategoryDropdown()
             ]
         );
     }
@@ -54,7 +55,8 @@ class ProductController
         (
             [
                 'viewModel' => $this->productService->getById($idProduct),
-                'dropdownUnit' => $this->dropdownService->UnitDropdown()
+                'dropdownUnit' => $this->dropdownService->UnitDropdown(),
+                'dropdownCategory' => $this->dropdownService->CategoryDropdown(),
             ]
         );
     }

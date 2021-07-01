@@ -16,10 +16,12 @@ let vue = new Vue({
         modalTile: '',
         buttonModalTile: '',
         dropdownUnit: [],
+        dropdownCategory: [],
         images: [],
         listImagePath: [],
         listImageDelete: null,
         showEdit: false,
+        categories: []
     },
     computed: {
 
@@ -37,6 +39,7 @@ let vue = new Vue({
                 case 'jsonCreate':
                     this.viewModel = response.viewModel;
                     this.dropdownUnit = response.dropdownUnit;
+                    this.dropdownCategory = response.dropdownCategory;
                     break;
                 case 'store':
                     if(response){
@@ -50,6 +53,7 @@ let vue = new Vue({
                 case 'jsonDetail':
                     this.viewModel = response.viewModel;
                     this.dropdownUnit = response.dropdownUnit;
+                    this.dropdownCategory = response.dropdownCategory;
                     break;
             }
         },
@@ -102,6 +106,7 @@ let vue = new Vue({
             }).finally((response) => {
                 if(action==='detail'){
                     this.setImages(this.viewModel.images);
+                    this.setCategories(this.viewModel.categories);
                     $('#ProductModal').modal('show');
                 }
                 loading(false);
@@ -110,6 +115,7 @@ let vue = new Vue({
         },
         save: function () {
             let listImageFile = [];
+            let listCategoryDelete = [];
             this.listImagePath.forEach((item)=>{
                 listImageFile.push({
                     'id':item.id??0,
@@ -118,8 +124,16 @@ let vue = new Vue({
                     'file': item.path
                 });
             });
+            console.log(this.viewModel.categories.length);
+            if(this.viewModel.categories.length!==0){
+                listCategoryDelete = this.viewModel.categories.filter(
+                    item => !this.categories.includes(item.idCategory)
+                );
+            }
             this.viewModel.listImageDelete = this.listImageDelete;
             this.viewModel.listImage = listImageFile;
+            this.viewModel.listCategory = this.categories;
+            this.viewModel.listCategoryDelete = listCategoryDelete;
             loading(true);
             let url = this.url + "/store";
             window.axios.post(url, this.viewModel).then((response) => {
@@ -154,6 +168,7 @@ let vue = new Vue({
             this.modalTile = '';
             this.buttonModalTile = '';
             this.images = [];
+            this.categories = [];
             this.listImagePath = [];
             this.listImageDelete = null;
         },
@@ -183,7 +198,13 @@ let vue = new Vue({
                     }
                 );
             });
-        }
+        },
+        setCategories: function (categories) {
+            categories.forEach((item)=>{
+                if(!item.state)return;
+                this.categories.push(item.idCategory);
+            });
+        },
     },
 });
 

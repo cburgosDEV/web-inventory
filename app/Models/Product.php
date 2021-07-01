@@ -23,6 +23,11 @@ class Product extends Model
         return $this->hasMany('App\Models\ProductImage', 'idProduct');
     }
 
+    public function categories()
+    {
+        return $this->hasMany('App\Models\ProductCategory', 'idProduct');
+    }
+
     public function scopeFiltersToProductIndex($query, $filters)
     {
         $query->where('product.name', 'like', '%' . $filters . '%')

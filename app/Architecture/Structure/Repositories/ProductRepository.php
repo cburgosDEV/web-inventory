@@ -17,7 +17,8 @@ class ProductRepository extends Product
             'stock' => 0,
             'state' => true,
             'idUnit' => 0,
-            'listImage' => []
+            'listImage' => [],
+            'listCategory' => [],
         ];
     }
 
@@ -27,6 +28,9 @@ class ProductRepository extends Product
             ->where('product.id', $id)
             ->with(['images' => function ($query){
                 $query->orderBy('isPrincipal', 'DESC');
+            }])
+            ->with(['categories' => function ($query){
+                $query->where('state', true);
             }])
             ->first();
     }

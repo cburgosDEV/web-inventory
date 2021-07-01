@@ -47302,10 +47302,12 @@ var vue = new Vue({
     modalTile: '',
     buttonModalTile: '',
     dropdownUnit: [],
+    dropdownCategory: [],
     images: [],
     listImagePath: [],
     listImageDelete: null,
-    showEdit: false
+    showEdit: false,
+    categories: []
   },
   computed: {},
   created: function created() {
@@ -47322,6 +47324,7 @@ var vue = new Vue({
         case 'jsonCreate':
           this.viewModel = response.viewModel;
           this.dropdownUnit = response.dropdownUnit;
+          this.dropdownCategory = response.dropdownCategory;
           break;
 
         case 'store':
@@ -47338,6 +47341,7 @@ var vue = new Vue({
         case 'jsonDetail':
           this.viewModel = response.viewModel;
           this.dropdownUnit = response.dropdownUnit;
+          this.dropdownCategory = response.dropdownCategory;
           break;
       }
     },
@@ -47395,6 +47399,8 @@ var vue = new Vue({
         if (action === 'detail') {
           _this3.setImages(_this3.viewModel.images);
 
+          _this3.setCategories(_this3.viewModel.categories);
+
           $('#ProductModal').modal('show');
         }
 
@@ -47406,6 +47412,7 @@ var vue = new Vue({
       var _this4 = this;
 
       var listImageFile = [];
+      var listCategoryDelete = [];
       this.listImagePath.forEach(function (item) {
         var _item$id;
 
@@ -47416,8 +47423,18 @@ var vue = new Vue({
           'file': item.path
         });
       });
+      console.log(this.viewModel.categories.length);
+
+      if (this.viewModel.categories.length !== 0) {
+        listCategoryDelete = this.viewModel.categories.filter(function (item) {
+          return !_this4.categories.includes(item.idCategory);
+        });
+      }
+
       this.viewModel.listImageDelete = this.listImageDelete;
       this.viewModel.listImage = listImageFile;
+      this.viewModel.listCategory = this.categories;
+      this.viewModel.listCategoryDelete = listCategoryDelete;
       loading(true);
       var url = this.url + "/store";
       window.axios.post(url, this.viewModel).then(function (response) {
@@ -47456,6 +47473,7 @@ var vue = new Vue({
       this.modalTile = '';
       this.buttonModalTile = '';
       this.images = [];
+      this.categories = [];
       this.listImagePath = [];
       this.listImageDelete = null;
     },
@@ -47488,6 +47506,15 @@ var vue = new Vue({
           highlight: (_item$isPrincipal2 = item.isPrincipal) !== null && _item$isPrincipal2 !== void 0 ? _item$isPrincipal2 : 0,
           caption: 'Producto'
         });
+      });
+    },
+    setCategories: function setCategories(categories) {
+      var _this7 = this;
+
+      categories.forEach(function (item) {
+        if (!item.state) return;
+
+        _this7.categories.push(item.idCategory);
       });
     }
   }
