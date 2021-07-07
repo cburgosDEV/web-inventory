@@ -21,12 +21,12 @@ var vue = new Vue({
     //SALE DETAIL DATA
     validations: {},
     showError: false,
-    unitSymbol: '',
     viewModelDetail: {},
     listDetail: [],
     validationsDetail: [],
     showErrorDetail: false,
-    showErrorListProduct: false
+    showErrorListProduct: false,
+    listDetailDelete: []
   },
   computed: {
     subTotal: function subTotal() {
@@ -57,7 +57,6 @@ var vue = new Vue({
 
         case 'jsonDetail':
           this.viewModelToDelete = response;
-          console.log(this.viewModelToDelete);
           break;
 
         case 'store':
@@ -66,7 +65,7 @@ var vue = new Vue({
             $('#SaleModal').modal('hide');
             this.initList();
           } else {
-            showToast('error', 'Ocurrió un error al guardar el registro');
+            showToast('error', 'No se puede realizar la venta');
           }
 
           break;
@@ -74,10 +73,18 @@ var vue = new Vue({
         case 'checkFormDetail':
           if (response) {
             this.listDetail.push(this.viewModelDetail);
+            this.removeProductFromDropdown(this.viewModelDetail.idProduct);
             this.viewModelDetail = {};
-            showToast('success', 'Operación realizada correctamente');
+            showToast('success', 'Producto agregado correctamente');
           } else {
-            showToast('error', 'Ocurrió un error al guardar el registro');
+            showToast('error', 'Ocurrió un error al agregar el producto');
+          }
+
+          break;
+
+        case 'getDataProduct':
+          if (response) {
+            this.viewModelDetail = response;
           }
 
           break;
@@ -141,11 +148,12 @@ var vue = new Vue({
       var _this4 = this;
 
       var data = {};
+      this.clearErrors();
 
       if (action === 'store') {
         if (this.listDetail === null) {
           this.showErrorListProduct = true;
-          showToast('warning', 'Seleccionar al menos un producto');
+          showToast('warning', 'Agregar al menos un producto');
           return;
         }
 
@@ -189,15 +197,27 @@ var vue = new Vue({
     getDataProduct: function getDataProduct() {
       var _this6 = this;
 
-      var productSelected = this.productsDropdown.filter(function (item) {
-        return item.value === _this6.viewModelDetail.idProduct;
+      loading(true);
+      this.clearErrorsDetail();
+      if (this.viewModelDetail.idProduct === undefined) return;
+      var url = this.url + "/jsonProduct/" + this.viewModelDetail.idProduct;
+      window.axios.get(url).then(function (response) {
+        _this6.switchResponseServer("getDataProduct", response.data);
+      })["catch"](function (error) {
+        if (error.response.status === 422) {
+          _this6.showErrorDetail = true;
+          _this6.validationsDetail = error.response.data.errors;
+        }
+
+        showToast('error', 'Revisar los datos ingresados');
+      })["finally"](function (response) {
+        loading(false);
       });
-      this.viewModelDetail.unitSymbol = productSelected[0].unitSymbol;
-      this.viewModelDetail.productName = productSelected[0].text;
     },
     addViewModelDetail: function addViewModelDetail() {
       var _this7 = this;
 
+      this.clearErrors();
       this.clearErrorsDetail();
       loading(true);
       var url = this.url + "/checkFormDetail";
@@ -227,17 +247,35 @@ var vue = new Vue({
       this.modalTitle = '';
       this.buttonModalTitle = '';
       this.viewModel = {};
+      this.viewModelDetail = {};
       this.listDetail = [];
       this.clearErrorsDetail();
       this.clearErrors();
     },
-    deleteProduct: function deleteProduct(index) {
+    deleteProduct: function deleteProduct(index, idProduct) {
       this.listDetail.splice(index);
+      this.addProductToDropdown(idProduct);
     },
     showModalDetail: function showModalDetail(detail, totalPrice) {
       this.saleDetail = detail;
       this.saleDetail.totalPrice = totalPrice;
       $('#SaleDetailModal').modal('show');
+    },
+    removeProductFromDropdown: function removeProductFromDropdown(idProduct) {
+      for (var i = 0; i < this.productsDropdown.length; i++) {
+        if (this.productsDropdown[i].value === idProduct) {
+          this.listDetailDelete.push(this.productsDropdown[i]);
+          this.productsDropdown.splice(i, 1);
+        }
+      }
+    },
+    addProductToDropdown: function addProductToDropdown(idProduct) {
+      for (var i = 0; i < this.listDetailDelete.length; i++) {
+        if (this.listDetailDelete[i].value === idProduct) {
+          this.productsDropdown.push(this.listDetailDelete[i]);
+          this.listDetailDelete.splice(i, 1);
+        }
+      }
     }
   }
 });

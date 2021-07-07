@@ -58,7 +58,9 @@
                     <hr/>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="idProduct">Producto:</label>
+                    <label for="idProduct">Producto
+                        (<span class="text-primary font-weight-bold">@{{viewModelDetail.unitSymbol}}</span>):
+                    </label>
                     <select class="custom-select" id="idProduct" v-model="viewModelDetail.idProduct" v-on:change="getDataProduct">
                         <option value="0" selected disabled>Seleccionar producto</option>
                         <option v-for="item in productsDropdown" :value="item.value">
@@ -66,16 +68,20 @@
                         </option>
                     </select>
                     <span v-if="showErrorDetail && validationsDetail.idProduct !== undefined" class="text-danger font-weight-light">@{{validationsDetail.idProduct[0]}}</span>
-                    <span v-if="showErrorListProduct" class="text-danger font-weight-light">*Seleccionar al menos un producto</span>
+                    <span v-if="showErrorListProduct" class="text-danger font-weight-light">*Agregar al menos un producto</span>
                     <span v-if="showError && validations.listDetail !== undefined" class="text-danger font-weight-light">@{{validations.listDetail[0]}}</span>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="unitaryPrice">Precio (S/.):</label>
+                    <label for="unitaryPrice">Precio
+                        (<span v-if="viewModelDetail.idProduct!==undefined">P. min: <span class="text-primary font-weight-bold">@{{viewModelDetail.minPrice}}</span></span>):
+                    </label>
                     <input type="number" class="form-control" id="unitaryPrice" placeholder="Precio" v-model="viewModelDetail.unitaryPrice">
                     <span v-if="showErrorDetail && validationsDetail.unitaryPrice !== undefined" class="text-danger font-weight-light">@{{validationsDetail.unitaryPrice[0]}}</span>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="quantity">Cantidad: (<span class="text-primary font-weight-bold">@{{viewModelDetail.unitSymbol}}</span>)</label>
+                    <label for="quantity">Cantidad
+                        (<span v-if="viewModelDetail.idProduct!==undefined">S. actual: <span :class="'font-weight-bold ' + [viewModelDetail.stock==='0.00'?'text-danger':'text-primary']">@{{viewModelDetail.stock}}</span></span>):
+                    </label>
                     <input type="number" class="form-control" id="quantity" placeholder="Cantidad" v-model="viewModelDetail.quantity">
                     <span v-if="showErrorDetail && validationsDetail.quantity !== undefined" class="text-danger font-weight-light">@{{validationsDetail.quantity[0]}}</span>
                 </div>
@@ -84,7 +90,7 @@
                     <input type="number" class="form-control" id="subTotal" placeholder="0" v-model="subTotal" disabled>
                 </div>
                 <div class="col-md-12 mb-3">
-                    <button class="btn btn-success w-100 font-weight-bold" v-on:click="addViewModelDetail">+</button>
+                    <button class="btn btn-success w-100 font-weight-bold" v-on:click="addViewModelDetail" :disabled="viewModelDetail.stock==='0.00'">+</button>
                 </div>
                 <div class="col-md-12">
                     <hr/>
@@ -110,7 +116,7 @@
                         <td>@{{ item.quantity }}</td>
                         <td>@{{ item.subTotal }}</td>
                         <td>
-                            <button class="btn btn-outline-danger btn-sm" v-on:click="deleteProduct(index)"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-outline-danger btn-sm" v-on:click="deleteProduct(index, item.idProduct)"><i class="fa fa-minus"></i></button>
                         </td>
                     </tr>
                     </tbody>

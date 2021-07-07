@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Architecture\Structure\Services\DropdownService;
+use App\Architecture\Structure\Services\ProductService;
 use App\Architecture\Structure\Services\SaleService;
 use App\Http\Request\StoreSale;
 use App\Http\Request\StoreSaleDetail;
@@ -15,11 +16,13 @@ class SaleController
     public function __construct
     (
         SaleService $saleService,
+        ProductService $productService,
         DropdownService $dropdownService
     )
     {
         $this->saleService = $saleService;
         $this->dropdownService = $dropdownService;
+        $this->productService = $productService;
     }
 
     public function index()
@@ -60,5 +63,10 @@ class SaleController
         $request->validated();
 
         return response()->json(true);
+    }
+
+    public function jsonProduct($idProduct)
+    {
+        return response()->json($this->productService->getByIdSimple($idProduct));
     }
 }

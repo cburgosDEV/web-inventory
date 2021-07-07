@@ -17,8 +17,8 @@ class StoreSaleDetail extends FormRequest
         {
             return [
                 'idProduct' => 'required',
-                'unitaryPrice' => 'required',
-                'quantity' => 'required',
+                'unitaryPrice' => 'required|numeric|gt:minPrice',
+                'quantity' => 'required|numeric|gt:0|lte:stock',
             ];
         }
     }
@@ -28,7 +28,12 @@ class StoreSaleDetail extends FormRequest
         $messagesES = [
             'idProduct.required' => '*Este campo es obligatorio.',
             'unitaryPrice.required' => '*Este campo es obligatorio.',
+            'unitaryPrice.numeric' => '**Ingresar un número válido.',
+            'unitaryPrice.gt' => '*Verificar el precio.',
             'quantity.required' => '*Este campo es obligatorio.',
+            'quantity.numeric' => '**Ingresar un número válido.',
+            'quantity.lte' => '*Verificar el stock.',
+            'quantity.gt' => '*Verificar el stock.',
         ];
 
         return $messagesES;

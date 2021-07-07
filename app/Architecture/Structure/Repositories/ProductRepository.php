@@ -35,6 +35,21 @@ class ProductRepository extends Product
             ->first();
     }
 
+    public function getByIdSimple($id)
+    {
+        return ProductRepository::select
+        (
+            'product.id as idProduct',
+            'product.name as productName',
+            'product.stock as stock',
+            'product.minPrice',
+            'unit.symbol as unitSymbol'
+        )
+            ->join('unit', 'product.idUnit', 'unit.id')
+            ->where('product.id', $id)
+            ->first();
+    }
+
     public function store(Product $product)
     {
         if($product->id == 0) {

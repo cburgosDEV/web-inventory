@@ -45,6 +45,9 @@ class SaleService
     public function store($request)
     {
         if($request->get('id')==0){
+            $validation = $this->validatePriceAndStockByProduct($request->get('listDetail'));
+            if(!$validation) return false;
+
             $model = $this->saleMapper->objectRequestToModel($request->all());
             $response = $this->saleRepository->store($model);
 
@@ -80,6 +83,17 @@ class SaleService
             $this->productService->addStock($saleDetail['idProduct'], $saleDetail['quantity']);
         }
 
+        return true;
+    }
+
+    public function validatePriceAndStockByProduct($listDetail){
+        foreach ($listDetail as $detail){
+            $stock = intval($detail['stock']);
+            $minPrice = intval($detail['minPrice']);
+            $quantity = intval($detail['quantity']);
+            $unitaryPrice = intval($detail['unitaryPrice']);
+            if($unitaryPrice<=0||$quantity<=0||$minPrice>$unitaryPrice||$stock<$quantity)return false;
+        }
         return true;
     }
 }

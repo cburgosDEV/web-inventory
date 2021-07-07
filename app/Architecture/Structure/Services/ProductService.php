@@ -43,6 +43,12 @@ class ProductService
         return $this->productRepository->getById($id);
     }
 
+    public function getByIdSimple($id)
+    {
+        if($id == 0) return $this->productRepository->buildEmptyModel();
+        return $this->productRepository->getByIdSimple($id);
+    }
+
     public function getAllPaginateToIndex($filterText)
     {
         return  $this->productRepository->getAllPaginateToIndex(10, $filterText);
