@@ -26,7 +26,7 @@ class StoreSale extends FormRequest
     {
         $messagesES = [
             'idCustomer.required' => '*Este campo es obligatorio.',
-            'listDetail.required' => '*Seleccionar al menos un producto.',
+            'listDetail.required' => '*Agregar al menos un producto.',
         ];
 
         return $messagesES;

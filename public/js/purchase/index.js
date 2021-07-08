@@ -57,7 +57,6 @@ var vue = new Vue({
 
         case 'jsonDetail':
           this.viewModelToDelete = response;
-          console.log(this.viewModelToDelete);
           break;
 
         case 'store':
@@ -66,7 +65,7 @@ var vue = new Vue({
             $('#PurchaseModal').modal('hide');
             this.initList();
           } else {
-            showToast('error', 'Ocurrió un error al guardar el registro');
+            showToast('error', 'No se puedo realizar la compra');
           }
 
           break;
@@ -75,9 +74,9 @@ var vue = new Vue({
           if (response) {
             this.listDetail.push(this.viewModelDetail);
             this.viewModelDetail = {};
-            showToast('success', 'Operación realizada correctamente');
+            showToast('success', 'Producto agregado correctamente');
           } else {
-            showToast('error', 'Ocurrió un error al guardar el registro');
+            showToast('error', 'Ocurrió un error al agregar el producto');
           }
 
           break;
@@ -198,6 +197,7 @@ var vue = new Vue({
     addViewModelDetail: function addViewModelDetail() {
       var _this7 = this;
 
+      this.clearErrors();
       this.clearErrorsDetail();
       loading(true);
       var url = this.url + "/checkFormDetail";
@@ -227,6 +227,7 @@ var vue = new Vue({
       this.modalTitle = '';
       this.buttonModalTitle = '';
       this.viewModel = {};
+      this.viewModelDetail = {};
       this.listDetail = [];
       this.clearErrorsDetail();
       this.clearErrors();

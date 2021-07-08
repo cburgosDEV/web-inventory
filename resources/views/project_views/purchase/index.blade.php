@@ -108,7 +108,7 @@
                         <td>@{{ item.unitSymbol }}</td>
                         <td>S/. @{{ item.unitaryPrice }}</td>
                         <td>@{{ item.quantity }}</td>
-                        <td>@{{ item.subTotal }}</td>
+                        <td>S/. @{{ item.subTotal }}</td>
                         <td>
                             <button class="btn btn-outline-danger btn-sm" v-on:click="deleteProduct(index)"><i class="fa fa-minus"></i></button>
                         </td>
@@ -117,7 +117,7 @@
                     <tfoot>
                     <tr>
                         <th colspan="5" class="font-weight-bold text-right">Total:</th>
-                        <th>@{{totalPrice}}</th>
+                        <th>S/. @{{totalPrice}}</th>
                         <th></th>
                     </tr>
                     </tfoot>

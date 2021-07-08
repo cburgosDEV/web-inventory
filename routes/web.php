@@ -71,6 +71,7 @@ Route::prefix('sale')->group(function () {
     Route::post('store', ['App\Http\Controllers\SaleController', 'store']);
     Route::get('jsonDetail/{idPurchase}', ['App\Http\Controllers\SaleController', 'jsonDetail']);
     Route::post('checkFormDetail', ['App\Http\Controllers\SaleController', 'checkFormDetail']);
+    Route::get('jsonProduct/{idProduct}', ['App\Http\Controllers\SaleController', 'jsonProduct']);
 });
 
 //EXPENSE

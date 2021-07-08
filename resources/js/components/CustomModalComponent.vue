@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-footer">
                     <button v-if="buttonTitle!==undefined" type="button" class="btn btn-primary" v-on:click="buttonAction">{{buttonTitle}}</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

@@ -43,6 +43,12 @@ class ProductService
         return $this->productRepository->getById($id);
     }
 
+    public function getByIdSimple($id)
+    {
+        if($id == 0) return $this->productRepository->buildEmptyModel();
+        return $this->productRepository->getByIdSimple($id);
+    }
+
     public function getAllPaginateToIndex($filterText)
     {
         return  $this->productRepository->getAllPaginateToIndex(10, $filterText);
@@ -195,6 +201,13 @@ class ProductService
     {
         $product = $this->productRepository->getById($idProduct);
         $product['stock'] = $product['stock'] - $quantity;
+        $this->productRepository->store($product);
+    }
+
+    public function setNewMinPrice($idProduct, $price)
+    {
+        $product = $this->productRepository->getById($idProduct);
+        $product['minPrice'] = $product['minPrice']>$price?$product['minPrice']:$price;
         $this->productRepository->store($product);
     }
 
