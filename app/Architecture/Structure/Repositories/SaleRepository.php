@@ -50,6 +50,7 @@ class SaleRepository extends Sale
                 $query->select('sale_detail.*', 'product.name as productName')
                     ->join('product', 'sale_detail.idProduct', 'product.id');
             }])
+            ->orderBy('sale.created_at', 'desc')
             ->filtersToSaleIndex($filterText)
             ->paginate($pages);
 

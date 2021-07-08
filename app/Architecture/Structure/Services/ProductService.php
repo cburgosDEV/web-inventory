@@ -204,6 +204,13 @@ class ProductService
         $this->productRepository->store($product);
     }
 
+    public function setNewMinPrice($idProduct, $price)
+    {
+        $product = $this->productRepository->getById($idProduct);
+        $product['minPrice'] = $product['minPrice']>$price?$product['minPrice']:$price;
+        $this->productRepository->store($product);
+    }
+
     public function saveCategory($listCategory, $idProduct)
     {
         foreach ($listCategory as $category)

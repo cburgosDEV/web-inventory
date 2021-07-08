@@ -61,6 +61,7 @@ class PurchaseService
 
                 if(is_numeric($responsePurchaseDetail->id)){
                     $this->productService->addStock($detail['idProduct'], $detail['quantity']);
+                    $this->productService->setNewMinPrice($detail['idProduct'], $detail['unitaryPrice']);
                 }
             }
             return is_numeric($response->id) > 0 ?? false;

@@ -65,7 +65,7 @@ var vue = new Vue({
             $('#SaleModal').modal('hide');
             this.initList();
           } else {
-            showToast('error', 'No se puede realizar la venta');
+            showToast('error', 'No se pudo realizar la venta');
           }
 
           break;

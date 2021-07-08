@@ -50,6 +50,7 @@ class PurchaseRepository extends Purchase
                 $query->select('purchase_detail.*', 'product.name as productName')
                     ->join('product', 'purchase_detail.idProduct', 'product.id');
             }])
+            ->orderBy('purchase.created_at', 'desc')
             ->filtersToPurchaseIndex($filterText)
             ->paginate($pages);
 
