@@ -17,8 +17,8 @@ class ProductRepository extends Product
             'stock' => 0,
             'state' => true,
             'idUnit' => 0,
-            'listImage' => [],
-            'listCategory' => [],
+            'images' => [],
+            'categories' => [],
         ];
     }
 

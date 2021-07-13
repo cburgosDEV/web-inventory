@@ -2,6 +2,7 @@
 
 namespace App\Architecture\Structure\Services;
 
+use App\Architecture\Helpers\StoreImageHelper;
 use App\Architecture\Mappers\ProductCategoryMapper;
 use App\Architecture\Mappers\ProductImageMapper;
 use App\Architecture\Mappers\ProductMapper;
@@ -18,6 +19,7 @@ class ProductService
     protected $productImageMapper;
     protected $productCategoryRepository;
     protected $productCategoryMapper;
+    protected $storeImageHelper;
 
     public function __construct
     (
@@ -26,7 +28,8 @@ class ProductService
         ProductImageRepository $productImageRepository,
         ProductImageMapper $productImageMapper,
         ProductCategoryRepository $productCategoryRepository,
-        ProductCategoryMapper $productCategoryMapper
+        ProductCategoryMapper $productCategoryMapper,
+        StoreImageHelper $storeImageHelper
     )
     {
         $this->productRepository = $productRepository;
@@ -35,6 +38,7 @@ class ProductService
         $this->productImageMapper = $productImageMapper;
         $this->productCategoryRepository = $productCategoryRepository;
         $this->productCategoryMapper = $productCategoryMapper;
+        $this->storeImageHelper = $storeImageHelper;
     }
 
     public function getById($id)
@@ -143,7 +147,7 @@ class ProductService
             $productImage = $this->productImageRepository->getById($image['id']);
             if($productImage==null){
                 $productImage = $this->productImageRepository->buildEmptyModel();
-                $responseImage = $this->storageImage($image['file']);
+                $responseImage = $this->storeImageHelper->storageImage($image['file'], "products/");
                 if($responseImage[0]) {
                     $productImage['url'] = $responseImage[1];
                     $productImage['isPrincipal'] = $image['highlight'] == 1 ?? false;
