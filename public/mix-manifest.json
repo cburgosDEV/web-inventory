@@ -8,5 +8,6 @@
     "/js/purchase/index.js": "/js/purchase/index.js",
     "/js/sale/index.js": "/js/sale/index.js",
     "/js/category/index.js": "/js/category/index.js",
+    "/js/user/index.js": "/js/user/index.js",
     "/css/app.css": "/css/app.css"
 }
