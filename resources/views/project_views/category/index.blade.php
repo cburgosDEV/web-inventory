@@ -21,7 +21,6 @@
                 <tr v-for="(category, index) in categories">
                     <th>@{{ index + 1 }}</th>
                     <td>@{{ category.name }}</td>
-                    <td>@{{ category.amount }}</td>
                     <td>
                         <button class="btn btn-outline-success btn-sm" v-on:click="showModal(category.id)"><i class="fa fa-eye"></i> Ver</button>
                         <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(category.id)"><i class="fa fa-trash"></i> Eliminar</button>

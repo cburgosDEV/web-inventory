@@ -45,10 +45,10 @@
                 <a id="product" class="nav-link" href="{{ url('/product') }}"><i class="fas fa-fw fa-shopping-basket"></i><span>Productos</span></a>
             </li>
             <li class="nav-item">
-                <a id="unit" class="nav-link" href="{{ url('/unit') }}"><i class="fas fa-fw fa-bars"></i><span>Categorías</span></a>
+                <a id="unit" class="nav-link" href="{{ url('/category') }}"><i class="fas fa-fw fa-bars"></i><span>Categorías</span></a>
             </li>
             <li class="nav-item">
-                <a id="category" class="nav-link" href="{{ url('/category') }}"><i class="fas fa-fw fa-pound-sign"></i><span>Unidades</span></a>
+                <a id="category" class="nav-link" href="{{ url('/unit') }}"><i class="fas fa-fw fa-pound-sign"></i><span>Unidades</span></a>
             </li>
             <li class="nav-item">
                 <a id="customer" class="nav-link" href="{{ url('/customer') }}"><i class="fas fa-fw fa-user-shield"></i><span>Clientes</span></a>
