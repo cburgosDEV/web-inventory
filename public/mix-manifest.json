@@ -9,5 +9,6 @@
     "/js/sale/index.js": "/js/sale/index.js",
     "/js/category/index.js": "/js/category/index.js",
     "/js/user/index.js": "/js/user/index.js",
+    "/js/home/index.js": "/js/home/index.js",
     "/css/app.css": "/css/app.css"
 }

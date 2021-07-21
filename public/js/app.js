@@ -2017,6 +2017,8 @@ __webpack_require__(/*! ./layout */ "./resources/js/layout.js");
 
 __webpack_require__(/*! ./waitMe.min.js */ "./resources/js/waitMe.min.js");
 
+__webpack_require__(/*! ./sb-admin-2.js */ "./resources/js/sb-admin-2.js");
+
 Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
 Vue.component('customCard', __webpack_require__(/*! ./components/CustomCardComponent.vue */ "./resources/js/components/CustomCardComponent.vue").default);
 Vue.component('searchBar', __webpack_require__(/*! ./components/SearchBarComponent.vue */ "./resources/js/components/SearchBarComponent.vue").default);
@@ -2041,11 +2043,6 @@ window.showToast = function (type, text) {
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
 
 try {
   window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js").default;
@@ -2053,28 +2050,9 @@ try {
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
 
 /***/ }),
 
@@ -2095,13 +2073,88 @@ window.loading = function (op) {
   } else {
     $('body').waitMe('hide');
   }
-}; // $(document).ajaxStart(function () {
-//     loading(true);
-// });
-//
-// $(document).ajaxComplete(function () {
-//     loading(false);
-// });
+};
+
+$(document).on("click", "#accordionSidebar li a", function () {
+  var datat = $(this).attr("id");
+  document.cookie = "currentmenu=" + datat + ";path=/";
+});
+$(document).ready(function () {
+  var cookieValor = document.cookie.replace(/(?:(?:^|.*;\s*)currentmenu\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  $('#accordionSidebar li').each(function (i) {
+    var a = $(this).find('a');
+    var datat = a.attr("id");
+    var datatId = a.attr("id");
+
+    if (datat === cookieValor) {
+      a.addClass("active");
+      $('#' + datatId).parent().addClass("active");
+    }
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/sb-admin-2.js":
+/*!************************************!*\
+  !*** ./resources/js/sb-admin-2.js ***!
+  \************************************/
+/***/ (() => {
+
+$(document).ready(function ($) {
+  "use strict"; // Start of use strict
+  // Toggle the side navigation
+
+  $("#sidebarToggle, #sidebarToggleTop").click(function () {
+    console.log('hola');
+    $("body").toggleClass("sidebar-toggled");
+    $(".sidebar").toggleClass("toggled");
+
+    if ($(".sidebar").hasClass("toggled")) {
+      $('.sidebar .collapse').collapse('hide');
+    }
+  }); // Close any open menu accordions when window is resized below 768px
+
+  $(window).resize(function () {
+    if ($(window).width() < 768) {
+      $('.sidebar .collapse').collapse('hide');
+    } // Toggle the side navigation when window is resized below 480px
+
+
+    if ($(window).width() < 480 && !$(".sidebar").hasClass("toggled")) {
+      $("body").addClass("sidebar-toggled");
+      $(".sidebar").addClass("toggled");
+      $('.sidebar .collapse').collapse('hide');
+    }
+  }); // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+
+  $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+    if ($(window).width() > 768) {
+      var e0 = e.originalEvent,
+          delta = e0.wheelDelta || -e0.detail;
+      this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+      e.preventDefault();
+    }
+  }); // Scroll to top button appear
+
+  $(document).on('scroll', function () {
+    var scrollDistance = $(this).scrollTop();
+
+    if (scrollDistance > 100) {
+      $('.scroll-to-top').fadeIn();
+    } else {
+      $('.scroll-to-top').fadeOut();
+    }
+  }); // Smooth scrolling using jQuery easing
+
+  $(document).on('click', 'a.scroll-to-top', function (e) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: $($anchor.attr('href')).offset().top
+    }, 1000, 'easeInOutExpo');
+    e.preventDefault();
+  });
+}); // End of use strict
 
 /***/ }),
 

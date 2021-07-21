@@ -9,29 +9,31 @@
             @button-action="showModal">
             <h6 class="font-weight-light"><i class="fa fa-list"></i> Lista de compras realizadas</h6>
             <search-bar @search="search"></search-bar>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Proveedor</th>
-                    <th>Monto</th>
-                    <th>Fecha de compra</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(purchase, index) in purchases">
-                    <th>@{{ index + 1 }}</th>
-                    <td>@{{ purchase.supplierName }}</td>
-                    <td>@{{ purchase.totalPrice }}</td>
-                    <td>@{{ purchase.createdDate }}</td>
-                    <td>
-                        <button class="btn btn-outline-success btn-sm" v-on:click="showModalDetail(purchase.detail, purchase.totalPrice)"><i class="fa fa-eye"></i> Ver compra</button>
-                        <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(purchase.id)"><i class="fa fa-trash"></i> Anular compra</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Proveedor</th>
+                        <th>Monto</th>
+                        <th>Fecha de compra</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(purchase, index) in purchases">
+                        <th>@{{ index + 1 }}</th>
+                        <td>@{{ purchase.supplierName }}</td>
+                        <td>@{{ purchase.totalPrice }}</td>
+                        <td>@{{ purchase.createdDate }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" v-on:click="showModalDetail(purchase.detail, purchase.totalPrice)"><i class="fa fa-eye"></i> Ver compra</button>
+                            <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(purchase.id)"><i class="fa fa-trash"></i> Anular compra</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <pagination
                 align="center"
                 :data="paginate"

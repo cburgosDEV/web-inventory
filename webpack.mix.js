@@ -30,3 +30,6 @@ mix.js('resources/js/project_scripts/category/index.js', 'public/js/category');
 
 //USER
 mix.js('resources/js/project_scripts/user/index.js', 'public/js/user');
+
+//HOME
+mix.js('resources/js/project_scripts/home/index.js', 'public/js/home');
