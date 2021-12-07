@@ -98,7 +98,7 @@ Route::group(['middleware'=>['auth']], function ()
         Route::get('jsonIndex/{filterText?}', ['App\Http\Controllers\UserController', 'jsonIndex']);
         Route::get('jsonCreate', ['App\Http\Controllers\UserController', 'jsonCreate']);
         Route::post('store', ['App\Http\Controllers\UserController', 'store']);
-        Route::get('jsonDetail/{idCategory}', ['App\Http\Controllers\UserController', 'jsonDetail']);
+        Route::get('jsonDetail/{idUser}', ['App\Http\Controllers\UserController', 'jsonDetail']);
         Route::post('changePassword', ['App\Http\Controllers\UserController', 'changePassword']);
     });
 });

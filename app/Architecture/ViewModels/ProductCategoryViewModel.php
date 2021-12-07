@@ -2,7 +2,7 @@
 
 namespace App\Architecture\ViewModels;
 
-use App\Models\ProductImage;
+use App\Models\ProductCategory;
 
 class ProductCategoryViewModel
 {
@@ -16,7 +16,7 @@ class ProductCategoryViewModel
 
     }
 
-    public function generateViewModel(ProductImage $model)
+    public function generateViewModel(ProductCategory $model)
     {
         $this->id = $model->id;
         $this->state = $model->state;

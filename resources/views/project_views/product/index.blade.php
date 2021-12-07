@@ -42,8 +42,8 @@
         </custom-card>
         <custom-modal
             id-modal="ProductModal"
-            :modal-title="modalTile"
-            :button-title="buttonModalTile"
+            :modal-title="modalTitle"
+            :button-title="buttonModalTitle"
             @button-action="save">
             <div class="form-row">
                 <div class="col-md-12 mb-3">

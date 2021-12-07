@@ -39,8 +39,8 @@
         </custom-card>
         <custom-modal
             id-modal="UserModal"
-            :modal-title="modalTile"
-            :button-title="buttonModalTile"
+            :modal-title="modalTitle"
+            :button-title="buttonModalTitle"
             @button-action="save">
             <div class="row">
                 <div class="col-md-12 col-lg-4 col-xl-4 d-flex justify-content-center">

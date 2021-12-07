@@ -44,8 +44,8 @@
         </custom-card>
         <custom-modal
             id-modal="CustomerModal"
-            :modal-title="modalTile"
-            :button-title="buttonModalTile"
+            :modal-title="modalTitle"
+            :button-title="buttonModalTitle"
             @button-action="save">
             <div class="container">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
