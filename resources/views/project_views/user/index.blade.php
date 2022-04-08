@@ -61,17 +61,17 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label for="name">Nombre del usuario:</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nombre del usuario" v-model="viewModel.name">
+                            <input type="text" class="form-control" id="name" v-model="viewModel.name">
                             <span v-if="showError && validations.name !== undefined" class="text-danger font-weight-light">@{{validations.name[0]}}</span>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" placeholder="Email" v-model="viewModel.email">
+                            <input type="email" class="form-control" id="email" v-model="viewModel.email">
                             <span v-if="showError && validations.email !== undefined" class="text-danger font-weight-light">@{{validations.email[0]}}</span>
                         </div>
                         <div v-if="!isEditForm" class="col-md-12 mb-3">
                             <label for="password">Contraseña:</label>
-                            <input type="password" class="form-control" id="password" placeholder="Contraseña" v-model="viewModel.password">
+                            <input type="password" class="form-control" id="password" v-model="viewModel.password">
                             <span v-if="showError && validations.password !== undefined" class="text-danger font-weight-light">@{{validations.password[0]}}</span>
                         </div>
                         <div class="col-md-12 mb-3">
@@ -97,12 +97,12 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label for="password">Nueva contraseña:</label>
-                            <input type="password" class="form-control" id="password" placeholder="Nueva contraseña:" v-model="password">
+                            <input type="password" class="form-control" id="password" v-model="password">
                             <span v-if="showErrorsChangePassword && validationsChangePassword.password !== undefined" class="text-danger">@{{validationsChangePassword.password[0]}}</span>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="rePassword">Repetir contraseña:</label>
-                            <input type="password" class="form-control" id="rePassword" placeholder="Repetir contraseña:" v-model="rePassword">
+                            <input type="password" class="form-control" id="rePassword" v-model="rePassword">
                             <span v-if="showErrorsChangePassword && validationsChangePassword.rePassword !== undefined" class="text-danger">@{{validationsChangePassword.rePassword[0]}}</span>
                         </div>
                     </div>

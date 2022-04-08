@@ -44305,7 +44305,12 @@ var render = function() {
     "div",
     {
       staticClass: "modal fade",
-      attrs: { id: _vm.idModal, tabindex: "-1", role: "dialog" }
+      attrs: {
+        id: _vm.idModal,
+        tabindex: "-1",
+        role: "dialog",
+        "data-backdrop": "static"
+      }
     },
     [
       _c(

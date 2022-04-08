@@ -49,7 +49,7 @@
                 <div class="col-md-12 mb-3">
                     <label for="idCustomer">Cliente:</label>
                     <select class="custom-select my-1 mr-sm-2" id="idCustomer" v-model="viewModel.idCustomer">
-                        <option value="0" selected disabled>Seleccionar cliente</option>
+                        <option value="null" selected disabled>Seleccionar cliente</option>
                         <option v-for="item in customersDropdown" :value="item.value">
                             @{{item.text}}
                         </option>
@@ -64,7 +64,7 @@
                         (<span class="text-primary font-weight-bold">@{{viewModelDetail.unitSymbol}}</span>):
                     </label>
                     <select class="custom-select" id="idProduct" v-model="viewModelDetail.idProduct" v-on:change="getDataProduct">
-                        <option value="0" selected disabled>Seleccionar producto</option>
+                        <option value="undefined" selected disabled>Seleccionar producto</option>
                         <option v-for="item in productsDropdown" :value="item.value">
                             @{{item.text}}
                         </option>
@@ -77,19 +77,19 @@
                     <label for="unitaryPrice">Precio
                         (<span v-if="viewModelDetail.idProduct!==undefined">P. min: <span class="text-primary font-weight-bold">@{{viewModelDetail.minPrice}}</span></span>):
                     </label>
-                    <input type="number" class="form-control" id="unitaryPrice" placeholder="Precio" v-model="viewModelDetail.unitaryPrice">
+                    <input type="number" class="form-control" id="unitaryPrice" v-model="viewModelDetail.unitaryPrice">
                     <span v-if="showErrorDetail && validationsDetail.unitaryPrice !== undefined" class="text-danger font-weight-light">@{{validationsDetail.unitaryPrice[0]}}</span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="quantity">Cantidad
                         (<span v-if="viewModelDetail.idProduct!==undefined">S. actual: <span :class="'font-weight-bold ' + [viewModelDetail.stock==='0.00'?'text-danger':'text-primary']">@{{viewModelDetail.stock}}</span></span>):
                     </label>
-                    <input type="number" class="form-control" id="quantity" placeholder="Cantidad" v-model="viewModelDetail.quantity">
+                    <input type="number" class="form-control" id="quantity" v-model="viewModelDetail.quantity">
                     <span v-if="showErrorDetail && validationsDetail.quantity !== undefined" class="text-danger font-weight-light">@{{validationsDetail.quantity[0]}}</span>
                 </div>
                 <div class="col-md-2 mb-3">
                     <label for="subTotal">Sub total:</label>
-                    <input type="number" class="form-control" id="subTotal" placeholder="0" v-model="subTotal" disabled>
+                    <input type="number" class="form-control" id="subTotal" v-model="subTotal" disabled>
                 </div>
                 <div class="col-md-12 mb-3">
                     <button class="btn btn-success w-100 font-weight-bold" v-on:click="addViewModelDetail" :disabled="viewModelDetail.stock==='0.00'">+</button>

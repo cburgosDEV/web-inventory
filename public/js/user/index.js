@@ -47299,8 +47299,8 @@ var vue = new Vue({
     viewModel: {},
     validations: {},
     showError: false,
-    modalTile: '',
-    buttonModalTile: '',
+    modalTitle: '',
+    buttonModalTitle: '',
     isEditForm: false,
     //IMAGE
     image: [],
@@ -47367,12 +47367,12 @@ var vue = new Vue({
       this.clearData();
 
       if (idUser === 0) {
-        this.modalTile = 'Crear nuevo usuario';
-        this.buttonModalTile = 'Guardar';
+        this.modalTitle = 'Crear nuevo usuario';
+        this.buttonModalTitle = 'Guardar';
         this.initFormCreate();
       } else {
-        this.modalTile = 'Detalle';
-        this.buttonModalTile = 'Actualizar';
+        this.modalTitle = 'Detalle';
+        this.buttonModalTitle = 'Actualizar';
         this.isEditForm = true;
         this.initFormDetail(idUser);
       }
@@ -47447,8 +47447,8 @@ var vue = new Vue({
       this.showError = false;
       this.validations = {};
       this.viewModel = {};
-      this.modalTile = '';
-      this.buttonModalTile = '';
+      this.modalTitle = '';
+      this.buttonModalTitle = '';
       this.image = [];
       this.imagePath = [];
     },

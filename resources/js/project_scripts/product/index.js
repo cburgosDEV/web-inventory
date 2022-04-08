@@ -124,7 +124,6 @@ let vue = new Vue({
                     'file': item.path
                 });
             });
-            console.log(this.viewModel.categories.length);
             if(this.viewModel.categories.length!==0){
                 listCategoryDelete = this.viewModel.categories.filter(
                     item => !this.categories.includes(item.idCategory)
