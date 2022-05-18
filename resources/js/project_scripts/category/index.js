@@ -11,8 +11,8 @@ let vue = new Vue({
         viewModel: {},
         validations : {},
         showError: false,
-        modalTile: '',
-        buttonModalTile: '',
+        modalTitle: '',
+        buttonModalTitle: '',
     },
     computed: {
 
@@ -62,12 +62,12 @@ let vue = new Vue({
         showModal: function (idCategory = 0) {
             this.clearData();
             if (idCategory === 0){
-                this.modalTile = 'Crear nuevo'
-                this.buttonModalTile = 'Guardar';
+                this.modalTitle = 'Crear nuevo'
+                this.buttonModalTitle = 'Guardar';
                 this.initFormCreate();
             } else {
-                this.modalTile = 'Detalle'
-                this.buttonModalTile = 'Actualizar';
+                this.modalTitle = 'Detalle'
+                this.buttonModalTitle = 'Actualizar';
                 this.initFormDetail(idCategory);
 
             }
@@ -130,8 +130,8 @@ let vue = new Vue({
             this.showError = false;
             this.validations = {};
             this.viewModel = {};
-            this.modalTile = '';
-            this.buttonModalTile = '';
+            this.modalTitle = '';
+            this.buttonModalTitle = '';
         }
     },
 });

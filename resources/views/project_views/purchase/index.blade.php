@@ -9,29 +9,31 @@
             @button-action="showModal">
             <h6 class="font-weight-light"><i class="fa fa-list"></i> Lista de compras realizadas</h6>
             <search-bar @search="search"></search-bar>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Proveedor</th>
-                    <th>Monto</th>
-                    <th>Fecha de compra</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(purchase, index) in purchases">
-                    <th>@{{ index + 1 }}</th>
-                    <td>@{{ purchase.supplierName }}</td>
-                    <td>@{{ purchase.totalPrice }}</td>
-                    <td>@{{ purchase.createdDate }}</td>
-                    <td>
-                        <button class="btn btn-outline-success btn-sm" v-on:click="showModalDetail(purchase.detail, purchase.totalPrice)"><i class="fa fa-eye"></i> Ver compra</button>
-                        <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(purchase.id)"><i class="fa fa-trash"></i> Anular compra</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Proveedor</th>
+                        <th>Monto</th>
+                        <th>Fecha de compra</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(purchase, index) in purchases">
+                        <th>@{{ index + 1 }}</th>
+                        <td>@{{ purchase.supplierName }}</td>
+                        <td>@{{ purchase.totalPrice }}</td>
+                        <td>@{{ purchase.createdDate }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" v-on:click="showModalDetail(purchase.detail, purchase.totalPrice)"><i class="fa fa-eye"></i> Ver compra</button>
+                            <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(purchase.id)"><i class="fa fa-trash"></i> Anular compra</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <pagination
                 align="center"
                 :data="paginate"
@@ -47,7 +49,7 @@
                 <div class="col-md-12 mb-3">
                     <label for="idSupplier">Proveedor:</label>
                     <select class="custom-select my-1 mr-sm-2" id="idSupplier" v-model="viewModel.idSupplier">
-                        <option value="0" selected disabled>Seleccionar proveedor</option>
+                        <option value="null" selected disabled>Seleccionar proveedor</option>
                         <option v-for="item in suppliersDropdown" :value="item.value">
                             @{{item.text}}
                         </option>
@@ -60,7 +62,7 @@
                 <div class="col-md-4 mb-3">
                     <label for="idProduct">Producto:</label>
                     <select class="custom-select" id="idProduct" v-model="viewModelDetail.idProduct" v-on:change="getDataProduct">
-                        <option value="0" selected disabled>Seleccionar producto</option>
+                        <option value="undefined" selected disabled>Seleccionar producto</option>
                         <option v-for="item in productsDropdown" :value="item.value">
                             @{{item.text}}
                         </option>
@@ -71,17 +73,17 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="unitaryPrice">Precio (S/.):</label>
-                    <input type="number" class="form-control" id="unitaryPrice" placeholder="Precio" v-model="viewModelDetail.unitaryPrice">
+                    <input type="number" class="form-control" id="unitaryPrice" v-model="viewModelDetail.unitaryPrice">
                     <span v-if="showErrorDetail && validationsDetail.unitaryPrice !== undefined" class="text-danger font-weight-light">@{{validationsDetail.unitaryPrice[0]}}</span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="quantity">Cantidad: (<span class="text-primary font-weight-bold">@{{viewModelDetail.unitSymbol}}</span>)</label>
-                    <input type="number" class="form-control" id="quantity" placeholder="Cantidad" v-model="viewModelDetail.quantity">
+                    <input type="number" class="form-control" id="quantity" v-model="viewModelDetail.quantity">
                     <span v-if="showErrorDetail && validationsDetail.quantity !== undefined" class="text-danger font-weight-light">@{{validationsDetail.quantity[0]}}</span>
                 </div>
                 <div class="col-md-2 mb-3">
                     <label for="subTotal">Sub total:</label>
-                    <input type="number" class="form-control" id="subTotal" placeholder="0" v-model="subTotal" disabled>
+                    <input type="number" class="form-control" id="subTotal" v-model="subTotal" disabled>
                 </div>
                 <div class="col-md-12 mb-3">
                     <button class="btn btn-success w-100 font-weight-bold" v-on:click="addViewModelDetail">+</button>

@@ -42,18 +42,18 @@
         </custom-card>
         <custom-modal
             id-modal="ProductModal"
-            :modal-title="modalTile"
-            :button-title="buttonModalTile"
+            :modal-title="modalTitle"
+            :button-title="buttonModalTitle"
             @button-action="save">
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label for="name">Producto: </label>
-                    <input type="text" class="form-control" id="name" placeholder="Producto" v-model="viewModel.name">
+                    <input type="text" class="form-control" id="name" v-model="viewModel.name">
                     <span v-if="showError && validations.name !== undefined" class="text-danger font-weight-light">@{{validations.name[0]}}</span>
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="description">Descripción:</label>
-                    <textarea class="form-control" id="description" rows="3" placeholder="Descripción" v-model="viewModel.description"></textarea>
+                    <textarea class="form-control" id="description" rows="3" v-model="viewModel.description"></textarea>
                     <span v-if="showError && validations.description !== undefined" class="text-danger font-weight-light">@{{validations.description[0]}}</span>
                 </div>
                 <div class="col-md-12 mb-3">
@@ -69,6 +69,7 @@
                 <div class="col-md-12 mb-3">
                     <label for="idCategory">Categoría:</label>
                     <v-select
+                        placeholder="Seleccionar"
                         multiple
                         :options="dropdownCategory"
                         label="text"

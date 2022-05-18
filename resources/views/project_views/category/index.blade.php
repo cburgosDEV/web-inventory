@@ -21,7 +21,6 @@
                 <tr v-for="(category, index) in categories">
                     <th>@{{ index + 1 }}</th>
                     <td>@{{ category.name }}</td>
-                    <td>@{{ category.amount }}</td>
                     <td>
                         <button class="btn btn-outline-success btn-sm" v-on:click="showModal(category.id)"><i class="fa fa-eye"></i> Ver</button>
                         <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(category.id)"><i class="fa fa-trash"></i> Eliminar</button>
@@ -37,13 +36,13 @@
         </custom-card>
         <custom-modal
             id-modal="CategoryModal"
-            :modal-title="modalTile"
-            :button-title="buttonModalTile"
+            :modal-title="modalTitle"
+            :button-title="buttonModalTitle"
             @button-action="save">
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <label for="name">Categoría:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Categoría" v-model="viewModel.name">
+                    <input type="text" class="form-control" id="name" v-model="viewModel.name">
                     <span v-if="showError && validations.name !== undefined" class="text-danger font-weight-light">@{{validations.name[0]}}</span>
                 </div>
             </div>

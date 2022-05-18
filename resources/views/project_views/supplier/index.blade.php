@@ -44,8 +44,8 @@
         </custom-card>
         <custom-modal
             id-modal="SupplierModal"
-            :modal-title="modalTile"
-            :button-title="buttonModalTile"
+            :modal-title="modalTitle"
+            :button-title="buttonModalTitle"
             @button-action="save">
             <div class="container">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -69,22 +69,22 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="name">Nombre:</label>
-                                <input type="text" class="form-control" id="name" placeholder="Nombre" v-model="viewModel.name">
+                                <input type="text" class="form-control" id="name" v-model="viewModel.name">
                                 <span v-if="showError && validations.name !== undefined" class="text-danger font-weight-light">@{{validations.name[0]}}</span>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="dni">DNI:</label>
-                                <input type="text" class="form-control" id="dni" placeholder="DNI" v-model="viewModel.dni">
+                                <input type="text" class="form-control" id="dni" v-model="viewModel.dni">
                                 <span v-if="showError && validations.dni !== undefined" class="text-danger font-weight-light">@{{validations.dni[0]}}</span>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="phone">Teléfono:</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Teléfono" v-model="viewModel.phone">
+                                <input type="text" class="form-control" id="phone" v-model="viewModel.phone">
                                 <span v-if="showError && validations.phone !== undefined" class="text-danger font-weight-light">@{{validations.phone[0]}}</span>
                             </div>
                             <div class="col-md-8 mb-3">
                                 <label for="address">Dirección:</label>
-                                <input type="text" class="form-control" id="address" placeholder="Dirección" v-model="viewModel.address">
+                                <input type="text" class="form-control" id="address" v-model="viewModel.address">
                                 <span v-if="showError && validations.address !== undefined" class="text-danger font-weight-light">@{{validations.address[0]}}</span>
                             </div>
                         </div>
@@ -93,22 +93,22 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="name">Razón Social:</label>
-                                <input type="text" class="form-control" id="name" placeholder="Razón Social" v-model="viewModel.name">
+                                <input type="text" class="form-control" id="name" v-model="viewModel.name">
                                 <span v-if="showError && validations.name !== undefined" class="text-danger font-weight-light">@{{validations.name[0]}}</span>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="ruc">RUC:</label>
-                                <input type="text" class="form-control" id="ruc" placeholder="RUC" v-model="viewModel.ruc">
+                                <input type="text" class="form-control" id="ruc" v-model="viewModel.ruc">
                                 <span v-if="showError && validations.ruc !== undefined" class="text-danger font-weight-light">@{{validations.ruc[0]}}</span>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="phone">Teléfono:</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Teléfono" v-model="viewModel.phone">
+                                <input type="text" class="form-control" id="phone" v-model="viewModel.phone">
                                 <span v-if="showError && validations.phone !== undefined" class="text-danger font-weight-light">@{{validations.phone[0]}}</span>
                             </div>
                             <div class="col-md-8 mb-3">
                                 <label for="address">Dirección:</label>
-                                <input type="text" class="form-control" id="address" placeholder="Dirección" v-model="viewModel.address">
+                                <input type="text" class="form-control" id="address" v-model="viewModel.address">
                                 <span v-if="showError && validations.address !== undefined" class="text-danger font-weight-light">@{{validations.address[0]}}</span>
                             </div>
                         </div>

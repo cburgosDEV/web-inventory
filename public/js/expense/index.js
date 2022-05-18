@@ -14,8 +14,8 @@ var vue = new Vue({
     viewModel: {},
     validations: {},
     showError: false,
-    modalTile: '',
-    buttonModalTile: ''
+    modalTitle: '',
+    buttonModalTitle: ''
   },
   computed: {},
   created: function created() {
@@ -70,12 +70,12 @@ var vue = new Vue({
       this.clearData();
 
       if (idExpense === 0) {
-        this.modalTile = 'Crear nuevo';
-        this.buttonModalTile = 'Guardar';
+        this.modalTitle = 'Crear nuevo';
+        this.buttonModalTitle = 'Guardar';
         this.initFormCreate();
       } else {
-        this.modalTile = 'Detalle';
-        this.buttonModalTile = 'Actualizar';
+        this.modalTitle = 'Detalle';
+        this.buttonModalTitle = 'Actualizar';
         this.initFormDetail(idExpense);
       }
 
@@ -145,8 +145,8 @@ var vue = new Vue({
       this.showError = false;
       this.validations = {};
       this.viewModel = {};
-      this.modalTile = '';
-      this.buttonModalTile = '';
+      this.modalTitle = '';
+      this.buttonModalTitle = '';
     }
   }
 });

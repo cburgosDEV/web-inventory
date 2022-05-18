@@ -38,18 +38,18 @@
         </custom-card>
         <custom-modal
             id-modal="ExpenseModal"
-            :modal-title="modalTile"
-            :button-title="buttonModalTile"
+            :modal-title="modalTitle"
+            :button-title="buttonModalTitle"
             @button-action="save">
             <div class="form-row">
                 <div class="col-md-8 mb-3">
                     <label for="name">Gasto:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Gasto" v-model="viewModel.name">
+                    <input type="text" class="form-control" id="name" v-model="viewModel.name">
                     <span v-if="showError && validations.name !== undefined" class="text-danger font-weight-light">@{{validations.name[0]}}</span>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="monto">Monto:</label>
-                    <input type="number" class="form-control" id="monto" placeholder="Monto" v-model="viewModel.amount">
+                    <input type="number" class="form-control" id="monto" v-model="viewModel.amount">
                     <span v-if="showError && validations.amount !== undefined" class="text-danger font-weight-light">@{{validations.amount[0]}}</span>
                 </div>
             </div>

@@ -10,7 +10,6 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 
-
 const sweetAlertOptions = {
     title: 'Estás seguro(a)?',
     text: 'Esta acción no se podrá revertir',
@@ -29,6 +28,7 @@ Vue.use(VueSweetalert2, sweetAlertOptions);
 
 require('./layout');
 require("./waitMe.min.js");
+require("./sb-admin-2.js");
 
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('customCard', require('./components/CustomCardComponent.vue').default);
