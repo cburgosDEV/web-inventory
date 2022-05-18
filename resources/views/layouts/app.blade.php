@@ -20,11 +20,13 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">Inventory App</div>
             </a>
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a id="home" class="nav-link" href="{{ url('/') }}"><i class="fas fa-fw fa-home"></i><span>Inicio</span></a>
-            </li>
-            <hr class="sidebar-divider">
+            @role('admin')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a id="home" class="nav-link" href="{{ url('/') }}"><i class="fas fa-fw fa-home"></i><span>Inicio</span></a>
+                </li>
+                <hr class="sidebar-divider">
+            @endrole
             <div class="sidebar-heading">
                 Principal
             </div>
@@ -56,13 +58,29 @@
             <li class="nav-item">
                 <a id="supplier" class="nav-link" href="{{ url('/supplier') }}"><i class="fas fa-fw fa-user-check"></i><span>Proveedores</span></a>
             </li>
+            @role('admin')
+                <li class="nav-item">
+                    <a id="user" class="nav-link" href="{{ url('/user') }}"><i class="fas fa-fw fa-users"></i><span>Usuarios</span></a>
+                </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+            <div class="sidebar-heading">
+                Reportes
+            </div>
             <li class="nav-item">
-                <a id="user" class="nav-link" href="{{ url('/user') }}"><i class="fas fa-fw fa-users"></i><span>Usuarios</span></a>
+                <a id="sale" class="nav-link" href="{{ url('/sale') }}"><i class="fas fa-fw fa-share-square"></i><span>Ventas</span></a>
+            </li>
+            <li class="nav-item">
+                <a id="purchase" class="nav-link" href="{{ url('/purchase') }}"><i class="fas fa-fw fa-reply-all"></i><span>Compras</span></a>
+            </li>
+            <li class="nav-item">
+                <a id="expense" class="nav-link" href="{{ url('/expense') }}"><i class="fas fa-fw fa-angle-double-down"></i><span>Gastos</span></a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+            @endrole
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
