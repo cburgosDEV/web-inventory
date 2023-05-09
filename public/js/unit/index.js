@@ -28,11 +28,9 @@ var vue = new Vue({
           this.units = response.model;
           this.paginate = response.paginate;
           break;
-
         case 'jsonCreate':
           this.viewModel = response;
           break;
-
         case 'store':
           if (response) {
             showToast('success', 'Operación realizada correctamente');
@@ -41,9 +39,7 @@ var vue = new Vue({
           } else {
             showToast('error', 'Ocurrió un error al guardar el registro');
           }
-
           break;
-
         case 'jsonDetail':
           this.viewModel = response;
           break;
@@ -51,7 +47,6 @@ var vue = new Vue({
     },
     initList: function initList() {
       var _this = this;
-
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       loading(true);
       var url = this.url + "/jsonIndex/" + this.filterText + '?page=' + page;
@@ -68,7 +63,6 @@ var vue = new Vue({
     showModal: function showModal() {
       var idUnit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.clearData();
-
       if (idUnit === 0) {
         this.modalTitle = 'Crear nuevo';
         this.buttonModalTitle = 'Guardar';
@@ -78,12 +72,10 @@ var vue = new Vue({
         this.buttonModalTitle = 'Actualizar';
         this.initFormDetail(idUnit);
       }
-
       $('#UnitModal').modal('show');
     },
     initFormCreate: function initFormCreate() {
       var _this2 = this;
-
       loading(true);
       var url = this.url + "/jsonCreate";
       window.axios.get(url).then(function (response) {
@@ -94,14 +86,12 @@ var vue = new Vue({
     },
     initFormDetail: function initFormDetail(idUnit, callback) {
       var _this3 = this;
-
       loading(true);
       var url = this.url + "/jsonDetail/" + idUnit;
       window.axios.get(url).then(function (response) {
         _this3.switchResponseServer("jsonDetail", response.data);
       })["catch"](function (error) {})["finally"](function (response) {
         loading(false);
-
         if (callback) {
           callback();
         }
@@ -109,7 +99,6 @@ var vue = new Vue({
     },
     save: function save() {
       var _this4 = this;
-
       loading(true);
       var url = this.url + "/store";
       window.axios.post(url, this.viewModel).then(function (response) {
@@ -119,7 +108,6 @@ var vue = new Vue({
           _this4.showError = true;
           _this4.validations = error.response.data.errors;
         }
-
         showToast('error', 'Revisar los datos ingresados');
       })["finally"](function (response) {
         loading(false);
@@ -127,13 +115,11 @@ var vue = new Vue({
     },
     softDelete: function softDelete(idUnit) {
       var _this5 = this;
-
       this.$swal({
         icon: 'warning'
       }).then(function (result) {
         if (result.value) {
           var context = _this5;
-
           _this5.initFormDetail(idUnit, function () {
             context.viewModel.state = false;
             context.save();

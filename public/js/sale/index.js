@@ -48,17 +48,14 @@ var vue = new Vue({
           this.sales = response.model;
           this.paginate = response.paginate;
           break;
-
         case 'jsonCreate':
           this.viewModel = response.model;
           this.productsDropdown = response.productsDropdown;
           this.customersDropdown = response.customersDropdown;
           break;
-
         case 'jsonDetail':
           this.viewModelToDelete = response;
           break;
-
         case 'store':
           if (response) {
             showToast('success', 'Operación realizada correctamente');
@@ -67,9 +64,7 @@ var vue = new Vue({
           } else {
             showToast('error', 'No se pudo realizar la venta');
           }
-
           break;
-
         case 'checkFormDetail':
           if (response) {
             this.listDetail.push(this.viewModelDetail);
@@ -79,20 +74,16 @@ var vue = new Vue({
           } else {
             showToast('error', 'Ocurrió un error al agregar el producto');
           }
-
           break;
-
         case 'getDataProduct':
           if (response) {
             this.viewModelDetail = response;
           }
-
           break;
       }
     },
     initList: function initList() {
       var _this = this;
-
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       loading(true);
       var url = this.url + "/jsonIndex/" + this.filterText + '?page=' + page;
@@ -109,18 +100,15 @@ var vue = new Vue({
     showModal: function showModal() {
       var idSale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.clearData();
-
       if (idSale === 0) {
         this.modalTitle = 'Registrar nueva venta';
         this.buttonModalTitle = 'Guardar';
         this.initFormCreate();
       }
-
       $('#SaleModal').modal('show');
     },
     initFormCreate: function initFormCreate() {
       var _this2 = this;
-
       loading(true);
       var url = this.url + "/jsonCreate";
       window.axios.get(url).then(function (response) {
@@ -131,14 +119,12 @@ var vue = new Vue({
     },
     initFormDetail: function initFormDetail(idSale, callback) {
       var _this3 = this;
-
       loading(true);
       var url = this.url + "/jsonDetail/" + idSale;
       window.axios.get(url).then(function (response) {
         _this3.switchResponseServer("jsonDetail", response.data);
       })["catch"](function (error) {})["finally"](function (response) {
         loading(false);
-
         if (callback) {
           callback();
         }
@@ -146,23 +132,19 @@ var vue = new Vue({
     },
     save: function save(action) {
       var _this4 = this;
-
       var data = {};
       this.clearErrors();
-
       if (action === 'store') {
         if (this.listDetail === null) {
           this.showErrorListProduct = true;
           showToast('warning', 'Agregar al menos un producto');
           return;
         }
-
         this.viewModel.listDetail = this.listDetail;
         data = this.viewModel;
       } else {
         data = this.viewModelToDelete;
       }
-
       loading(true);
       var url = this.url + "/store";
       window.axios.post(url, data).then(function (response) {
@@ -172,7 +154,6 @@ var vue = new Vue({
           _this4.showError = true;
           _this4.validations = error.response.data.errors;
         }
-
         showToast('error', 'Revisar los datos ingresados');
       })["finally"](function (response) {
         loading(false);
@@ -180,13 +161,11 @@ var vue = new Vue({
     },
     softDelete: function softDelete(idSale) {
       var _this5 = this;
-
       this.$swal({
         icon: 'warning'
       }).then(function (result) {
         if (result.value) {
           var context = _this5;
-
           _this5.initFormDetail(idSale, function () {
             context.viewModelToDelete.state = false;
             context.save('softDelete');
@@ -196,7 +175,6 @@ var vue = new Vue({
     },
     getDataProduct: function getDataProduct() {
       var _this6 = this;
-
       loading(true);
       this.clearErrorsDetail();
       if (this.viewModelDetail.idProduct === undefined) return;
@@ -208,7 +186,6 @@ var vue = new Vue({
           _this6.showErrorDetail = true;
           _this6.validationsDetail = error.response.data.errors;
         }
-
         showToast('error', 'Revisar los datos ingresados');
       })["finally"](function (response) {
         loading(false);
@@ -216,7 +193,6 @@ var vue = new Vue({
     },
     addViewModelDetail: function addViewModelDetail() {
       var _this7 = this;
-
       this.clearErrors();
       this.clearErrorsDetail();
       loading(true);
@@ -228,7 +204,6 @@ var vue = new Vue({
           _this7.showErrorDetail = true;
           _this7.validationsDetail = error.response.data.errors;
         }
-
         showToast('error', 'Revisar los datos ingresados');
       })["finally"](function (response) {
         loading(false);

@@ -118,6 +118,7 @@ let vue = new Vue({
             let url = this.url + "/store";
             if(this.imagePath.length>0)this.viewModel.image = this.imagePath[0].path;
             loading(true);
+            console.log(this.viewModel);
             window.axios.post(url, this.viewModel).then((response) => {
                 this.switchResponseServer("store", response.data);
             }).catch((error) => {

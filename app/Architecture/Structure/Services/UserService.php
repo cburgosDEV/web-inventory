@@ -47,6 +47,8 @@ class UserService
             return $this->userRepository->store($model);
         }
         else {
+            dump($request->all());
+
             $model = $this->userRepository->getById($request->get('id'));
             $model->fill($request->all());
 
@@ -57,9 +59,9 @@ class UserService
             }
 
             //DELETE IMAGE
-            if($request->get('isImageDeleted') && $request->get('avatar')!='avatar.png'){
+            if($request->get('isImageDeleted') && $request->get('avatar')!='img/avatar.png'){
                 Storage::disk('public')->delete($model['avatar']);
-                $model['avatar'] = 'avatar.png';
+                $model['avatar'] = 'img/avatar.png';
             }
 
             //SAVE IMAGE
