@@ -23,7 +23,7 @@ class UserMapper
         $model->email = $object['email'];
         $model->password = Hash::make($object['password']);
         $model->state = $object['state'];
-        $model->avatar = $object['avatar']??'img/avatar.png';
+        $model->avatar = $object['avatar']??'users/avatar.png';
 
         return $model;
     }

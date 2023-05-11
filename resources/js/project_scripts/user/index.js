@@ -107,7 +107,7 @@ let vue = new Vue({
             }).catch((error) => {
 
             }).finally((response) => {
-                this.setImageToShow(this.viewModel.avatar);
+                this.setImageToShow(this.viewModel.urlFirebase);
                 loading(false);
                 if(callback){
                     callback();
@@ -167,7 +167,7 @@ let vue = new Vue({
         setImageToShow: function (image){
             this.image.push(
                 {
-                    path: 'storage/'+image,
+                    path: image,
                     default: 1,
                     highlight: 1,
                     caption: 'Profile'

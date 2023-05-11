@@ -190,7 +190,7 @@ let vue = new Vue({
                 this.images.push(
                     {
                         id: item.id,
-                        path: 'storage/'+item.url,
+                        path: item.urlFirebase,
                         default: item.isPrincipal??0,
                         highlight: item.isPrincipal??0,
                         caption: 'Producto'

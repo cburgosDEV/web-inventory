@@ -10,7 +10,7 @@ class AddColumnsInUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('state')->default(true);
-            $table->string('avatar', 255)->default('img/avatar.png');
+            $table->string('avatar', 255)->default('users/avatar.png');
         });
     }
 

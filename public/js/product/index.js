@@ -47048,7 +47048,7 @@ var vue = new Vue({
         if (!item.state) return;
         _this6.images.push({
           id: item.id,
-          path: 'storage/' + item.url,
+          path: item.urlFirebase,
           "default": (_item$isPrincipal = item.isPrincipal) !== null && _item$isPrincipal !== void 0 ? _item$isPrincipal : 0,
           highlight: (_item$isPrincipal2 = item.isPrincipal) !== null && _item$isPrincipal2 !== void 0 ? _item$isPrincipal2 : 0,
           caption: 'Producto'
