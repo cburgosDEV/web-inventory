@@ -52,7 +52,6 @@ class ProductService
         foreach($product['images'] as $user) {
             $user->urlFirebase = $this->firebaseService->getImage($user->url);
         }
-        dump($product['images']);
         return $product;
     }
 
