@@ -54,6 +54,13 @@ class UserService
             $model = $this->userMapper->objectRequestToModel($request->all());
             $model->assignRole(Role::findByName($request->get('role')));
 
+            //SAVE IMAGE
+            if($request->get('image')!=null) {
+                $image = $request->get('image');
+                $responseImage = $this->firebaseService->storeImage($image, "users/");
+                $model->avatar = $responseImage;
+            }
+
             return $this->userRepository->store($model);
         }
         else {

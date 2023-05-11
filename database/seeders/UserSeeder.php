@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Administrador del Sistema',
             'state' => true,
-            'avatar' => 'img/avatar.png',
+            'avatar' => 'users/avatar.png',
             'email' => 'administrador@webapp.com',
             'password' => '$2y$10$.n9cbsO273dzcFf5nj5QU.4WG6LHsK3WrszmUUmIU8IwmufWDn91e', // password = 123456
         ]);
