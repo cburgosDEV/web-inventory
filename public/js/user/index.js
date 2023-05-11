@@ -46959,7 +46959,7 @@ var vue = new Vue({
       window.axios.get(url).then(function (response) {
         _this3.switchResponseServer("jsonDetail", response.data);
       })["catch"](function (error) {})["finally"](function (response) {
-        _this3.setImageToShow(_this3.viewModel.avatar);
+        _this3.setImageToShow(_this3.viewModel.urlFirebase);
         loading(false);
         if (callback) {
           callback();
@@ -47020,7 +47020,7 @@ var vue = new Vue({
     },
     setImageToShow: function setImageToShow(image) {
       this.image.push({
-        path: 'storage/' + image,
+        path: image,
         "default": 1,
         highlight: 1,
         caption: 'Profile'

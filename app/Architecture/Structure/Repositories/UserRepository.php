@@ -19,6 +19,7 @@ class UserRepository
             'role' => '',
             'image' => '',
             'isImageDeleted' => false,
+            'avatarUrl' => ''
         ];
     }
 

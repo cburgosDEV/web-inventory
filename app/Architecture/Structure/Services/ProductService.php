@@ -20,6 +20,7 @@ class ProductService
     protected $productCategoryRepository;
     protected $productCategoryMapper;
     protected $storeImageHelper;
+    protected $firebaseService;
 
     public function __construct
     (
@@ -29,7 +30,8 @@ class ProductService
         ProductImageMapper $productImageMapper,
         ProductCategoryRepository $productCategoryRepository,
         ProductCategoryMapper $productCategoryMapper,
-        StoreImageHelper $storeImageHelper
+        StoreImageHelper $storeImageHelper,
+        FirebaseService $firebaseService
     )
     {
         $this->productRepository = $productRepository;
@@ -39,12 +41,19 @@ class ProductService
         $this->productCategoryRepository = $productCategoryRepository;
         $this->productCategoryMapper = $productCategoryMapper;
         $this->storeImageHelper = $storeImageHelper;
+        $this->firebaseService = $firebaseService;
     }
 
     public function getById($id)
     {
         if($id == 0) return $this->productRepository->buildEmptyModel();
-        return $this->productRepository->getById($id);
+        $product = $this->productRepository->getById($id);
+
+        foreach($product['images'] as $user) {
+            $user->urlFirebase = $this->firebaseService->getImage($user->url);
+        }
+        dump($product['images']);
+        return $product;
     }
 
     public function getByIdSimple($id)
@@ -147,9 +156,9 @@ class ProductService
             $productImage = $this->productImageRepository->getById($image['id']);
             if($productImage==null){
                 $productImage = $this->productImageRepository->buildEmptyModel();
-                $responseImage = $this->storeImageHelper->storageImage($image['file'], "products/");
+                $responseImage = $this->firebaseService->storeImage($image['file'], "products/");
                 if($responseImage[0]) {
-                    $productImage['url'] = $responseImage[1];
+                    $productImage['url'] = $responseImage;
                     $productImage['isPrincipal'] = $image['highlight'] == 1 ?? false;
                     $productImage['idProduct'] = $idProduct;
                     $productImageModel = $this->productImageMapper->objectRequestToModel($productImage);
@@ -177,21 +186,7 @@ class ProductService
         $productImage['state'] = false;
         $this->productImageRepository->store($productImage);
 
-        Storage::disk('public')->delete($productImage['url']);
-    }
-
-    public function storageImage($img)
-    {
-        $folderPath = "products/";
-        $image_parts = explode(";base64,", $img);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
-        $file = $folderPath . uniqid() . '.'.$image_type;
-
-        $response = Storage::disk('public')->put($file, $image_base64);
-
-        return [$response, $file];
+        $this->firebaseService->deleteImage($productImage['url']);
     }
 
     public function addStock($idProduct, $quantity)

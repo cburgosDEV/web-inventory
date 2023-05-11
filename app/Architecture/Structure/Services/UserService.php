@@ -14,28 +14,38 @@ class UserService
     protected $userRepository;
     protected $userMapper;
     protected $storeImageHelper;
+    protected $firebaseService;
 
     public function __construct
     (
         UserRepository $userRepository,
         UserMapper $userMapper,
-        StoreImageHelper $storeImageHelper
+        StoreImageHelper $storeImageHelper,
+        FirebaseService $firebaseService
     )
     {
         $this->userRepository = $userRepository;
         $this->userMapper = $userMapper;
         $this->storeImageHelper = $storeImageHelper;
+        $this->firebaseService = $firebaseService;
     }
 
     public function getById($id)
     {
         if($id == 0) return $this->userRepository->buildEmptyModel();
-        return $this->userRepository->getById($id);
+        $user = $this->userRepository->getById($id);
+        $user->urlFirebase = $this->firebaseService->getImage($user->avatar);
+        return $user;
     }
 
     public function getAllPaginateToIndex($filterText)
     {
-        return  $this->userRepository->getAllPaginateToIndex(10, $filterText);
+        $listUsers = $this->userRepository->getAllPaginateToIndex(10, $filterText);
+        foreach($listUsers['model'] as $user) {
+            $user->avatarUrl = $this->firebaseService->getImage($user->avatar);
+        }
+
+        return  $listUsers;
     }
 
     public function store($request)
@@ -47,8 +57,6 @@ class UserService
             return $this->userRepository->store($model);
         }
         else {
-            dump($request->all());
-
             $model = $this->userRepository->getById($request->get('id'));
             $model->fill($request->all());
 
@@ -59,16 +67,16 @@ class UserService
             }
 
             //DELETE IMAGE
-            if($request->get('isImageDeleted') && $request->get('avatar')!='img/avatar.png'){
-                Storage::disk('public')->delete($model['avatar']);
-                $model['avatar'] = 'img/avatar.png';
+            if($request->get('isImageDeleted') && $request->get('avatar')!='users/avatar.png') {
+                $this->firebaseService->deleteImage($model['avatar']);
+                $model['avatar'] = 'users/avatar.png';
             }
 
             //SAVE IMAGE
-            if($request->get('image')!=null){
+            if($request->get('image')!=null) {
                 $image = $request->get('image');
-                $responseImage = $this->storeImageHelper->storageImage($image, "users/");
-                if($responseImage[0]) $model['avatar'] = $responseImage[1];
+                $responseImage = $this->firebaseService->storeImage($image, "users/");
+                $model['avatar'] = $responseImage;
             }
 
             return $this->userRepository->store($model);

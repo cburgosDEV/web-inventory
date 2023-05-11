@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 class StoreImageHelper
 {
+    //GUARDA IMAGEN LOCALMENTE
     public function storageImage($img, $folderPath)
     {
         $image_parts = explode(";base64,", $img);
