@@ -9,28 +9,30 @@
             @button-action="showModal">
             <h6 class="font-weight-light"><i class="fa fa-list"></i> Lista de usuarios</h6>
             <search-bar @search="search"></search-bar>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre del usuario</th>
-                    <th>Email</th>
-                    <th>Opciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(user, index) in users">
-                    <th>@{{ index + 1 }}</th>
-                    <td>@{{ user.name }}</td>
-                    <td>@{{ user.email }}</td>
-                    <td>
-                        <button class="btn btn-outline-success btn-sm" v-on:click="showModal(user.id)"><i class="fa fa-eye"></i> Ver</button>
-                        <button class="btn btn-outline-dark btn-sm" v-on:click="showModalChangePassword(user.id)"><i class="fa fa-lock"></i> Cambiar contraseña</button>
-                        <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(user.id)"><i class="fa fa-trash"></i> Eliminar</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre del usuario</th>
+                        <th>Email</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(user, index) in users">
+                        <th>@{{ index + 1 }}</th>
+                        <td>@{{ user.name }}</td>
+                        <td>@{{ user.email }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" v-on:click="showModal(user.id)"><i class="fa fa-eye"></i> Ver</button>
+                            <button class="btn btn-outline-dark btn-sm" v-on:click="showModalChangePassword(user.id)"><i class="fa fa-lock"></i> Cambiar contraseña</button>
+                            <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(user.id)"><i class="fa fa-trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <pagination
                 align="center"
                 :data="paginate"

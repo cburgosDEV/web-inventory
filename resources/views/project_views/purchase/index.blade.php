@@ -17,7 +17,7 @@
                         <th>Proveedor</th>
                         <th>Monto</th>
                         <th>Fecha de compra</th>
-                        <th></th>
+                        <th>Opciones</th>
                     </tr>
                     </thead>
                     <tbody>

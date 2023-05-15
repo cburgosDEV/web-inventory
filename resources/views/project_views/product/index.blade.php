@@ -9,31 +9,33 @@
             @button-action="showModal(0,'create')">
             <h6 class="font-weight-light"><i class="fa fa-list"></i> Lista de productos</h6>
             <search-bar @search="search"></search-bar>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Producto</th>
-                    <th>Unidad de medida</th>
-                    <th>Precio mínimo</th>
-                    <th>Stock</th>
-                    <th>Options</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(product, index) in products">
-                    <th>@{{ index + 1 }}</th>
-                    <td>@{{ product.name }}</td>
-                    <td>@{{ product.nameUnit }}</td>
-                    <td>@{{ product.minPrice }}</td>
-                    <td>@{{ product.stock }}</td>
-                    <td>
-                        <button class="btn btn-outline-success btn-sm" v-on:click="showModal(product.id, 'detail')"><i class="fa fa-eye"></i> Ver</button>
-                        <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(product.id)"><i class="fa fa-trash"></i> Eliminar</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Producto</th>
+                        <th>Unidad de medida</th>
+                        <th>Precio mínimo</th>
+                        <th>Stock</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(product, index) in products">
+                        <th>@{{ index + 1 }}</th>
+                        <td>@{{ product.name }}</td>
+                        <td>@{{ product.nameUnit }}</td>
+                        <td>@{{ product.minPrice }}</td>
+                        <td>@{{ product.stock }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" v-on:click="showModal(product.id, 'detail')"><i class="fa fa-eye"></i> Ver</button>
+                            <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(product.id)"><i class="fa fa-trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <pagination
                 align="center"
                 :data="paginate"

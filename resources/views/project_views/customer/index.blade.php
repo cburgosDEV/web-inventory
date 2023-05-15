@@ -9,33 +9,35 @@
             @button-action="showModal">
             <h6 class="font-weight-light"><i class="fa fa-list"></i> Lista de clientes</h6>
             <search-bar @search="search"></search-bar>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Tipo de persona</th>
-                    <th>DNI/RUC</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Options</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(customer, index) in customers">
-                    <th>@{{ index + 1 }}</th>
-                    <td>@{{ customer.name }}</td>
-                    <td>@{{ customer.nameTypePerson }}</td>
-                    <td>@{{ customer.dni }}@{{ customer.ruc }}</td>
-                    <td>@{{ customer.phone }}</td>
-                    <td>@{{ customer.address }}</td>
-                    <td>
-                        <button class="btn btn-outline-success btn-sm" v-on:click="showModal(customer.id)"><i class="fa fa-eye"></i> Ver</button>
-                        <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(customer.id)"><i class="fa fa-trash"></i> Eliminar</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Tipo de persona</th>
+                        <th>DNI/RUC</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(customer, index) in customers">
+                        <th>@{{ index + 1 }}</th>
+                        <td>@{{ customer.name }}</td>
+                        <td>@{{ customer.nameTypePerson }}</td>
+                        <td>@{{ customer.dni }}@{{ customer.ruc }}</td>
+                        <td>@{{ customer.phone }}</td>
+                        <td>@{{ customer.address }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" v-on:click="showModal(customer.id)"><i class="fa fa-eye"></i> Ver</button>
+                            <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(customer.id)"><i class="fa fa-trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <pagination
                 align="center"
                 :data="paginate"

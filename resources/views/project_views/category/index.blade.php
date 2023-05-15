@@ -9,25 +9,27 @@
             @button-action="showModal">
             <h6 class="font-weight-light"><i class="fa fa-list"></i> Lista de categorías</h6>
             <search-bar @search="search"></search-bar>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Categoría</th>
-                    <th>Options</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(category, index) in categories">
-                    <th>@{{ index + 1 }}</th>
-                    <td>@{{ category.name }}</td>
-                    <td>
-                        <button class="btn btn-outline-success btn-sm" v-on:click="showModal(category.id)"><i class="fa fa-eye"></i> Ver</button>
-                        <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(category.id)"><i class="fa fa-trash"></i> Eliminar</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Categoría</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(category, index) in categories">
+                        <th>@{{ index + 1 }}</th>
+                        <td>@{{ category.name }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" v-on:click="showModal(category.id)"><i class="fa fa-eye"></i> Ver</button>
+                            <button class="btn btn-outline-danger btn-sm" v-on:click="softDelete(category.id)"><i class="fa fa-trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <pagination
                 align="center"
                 :data="paginate"
