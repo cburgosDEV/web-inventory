@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-primary">{{modalTitle}}</h5>
+                    <h5 class="modal-title text-warning">{{modalTitle}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -12,7 +12,7 @@
                     <slot></slot>
                 </div>
                 <div class="modal-footer">
-                    <button v-if="buttonTitle!==undefined" type="button" class="btn btn-primary" v-on:click="buttonAction">{{buttonTitle}}</button>
+                    <button v-if="buttonTitle!==undefined" type="button" class="btn btn-warning" v-on:click="buttonAction">{{buttonTitle}}</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

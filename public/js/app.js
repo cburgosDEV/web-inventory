@@ -2166,17 +2166,21 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "card-body"
   }, [_c("div", {
-    staticClass: "d-flex justify-content-between"
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-sm-6"
   }, [_c("h4", {
-    staticClass: "card-title text-primary font-weight-bold"
-  }, [_vm._v(_vm._s(_vm.cardTitle))]), _vm._v(" "), _vm.buttonTitle !== undefined ? _c("button", {
-    staticClass: "btn btn-outline-primary text-left",
+    staticClass: "card-title text-warning font-weight-bold"
+  }, [_vm._v(_vm._s(_vm.cardTitle))])]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-6 text-right"
+  }, [_vm.buttonTitle !== undefined ? _c("button", {
+    staticClass: "btn btn-outline-warning",
     on: {
       click: _vm.buttonAction
     }
   }, [_c("i", {
     "class": "fa fa-" + _vm.buttonIcon
-  }), _vm._v(" " + _vm._s(_vm.buttonTitle))]) : _vm._e()]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._t("default")], 2)]);
+  }), _vm._v(" " + _vm._s(_vm.buttonTitle))]) : _vm._e()])]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._t("default")], 2)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2217,13 +2221,13 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "modal-header"
   }, [_c("h5", {
-    staticClass: "modal-title text-primary"
+    staticClass: "modal-title text-warning"
   }, [_vm._v(_vm._s(_vm.modalTitle))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
     staticClass: "modal-body"
   }, [_vm._t("default")], 2), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_vm.buttonTitle !== undefined ? _c("button", {
-    staticClass: "btn btn-primary",
+    staticClass: "btn btn-warning",
     attrs: {
       type: "button"
     },
@@ -2407,7 +2411,7 @@ window.loading = function (op) {
       effect: 'pulse',
       text: 'Cargando...',
       bg: 'rgba(255,255,255,0.6)',
-      color: '#007BFF'
+      color: '#f6c23e'
     });
   } else {
     $('body').waitMe('hide');
@@ -18122,7 +18126,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.search {\n    width: 100%;\n    margin-bottom: auto;\n    margin-top: 20px;\n    height: 50px;\n    background-color: #EEEEEE;\n    padding: 10px;\n    border-radius: 5px;\n}\n.search-input {\n    color: white;\n    border: 0;\n    outline: 0;\n    background: none;\n    width: 0;\n    margin-top: 5px;\n    caret-color: transparent;\n    line-height: 20px;\n    transition: width 0.4s linear;\n}\n.search .search-input {\n    padding: 0 10px;\n    width: 100%;\n    caret-color: #536bf6;\n    font-size: 19px;\n    font-weight: 300;\n    color: black;\n    transition: width 0.4s linear;\n}\n.search-icon {\n    height: 34px;\n    width: 34px;\n    float: right;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    color: white;\n    background-color: #536bf6;\n    font-size: 10px;\n    bottom: 30px;\n    position: relative;\n    border-radius: 5px;\n}\n.search-icon:hover {\n    text-decoration: none;\n    background: #3046ff;\n    cursor: pointer;\n    color: #fff !important\n}\na:link {\n    text-decoration: none\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.search {\n    width: 100%;\n    margin-bottom: auto;\n    margin-top: 20px;\n    height: 50px;\n    background-color: #EEEEEE;\n    padding: 10px;\n    border-radius: 5px;\n}\n.search-input {\n    color: white;\n    border: 0;\n    outline: 0;\n    background: none;\n    width: 0;\n    margin-top: 5px;\n    caret-color: transparent;\n    line-height: 20px;\n    transition: width 0.4s linear;\n}\n.search .search-input {\n    padding: 0 10px;\n    width: 100%;\n    caret-color: #f6c23e;\n    font-size: 19px;\n    font-weight: 300;\n    color: black;\n    transition: width 0.4s linear;\n}\n.search-icon {\n    height: 34px;\n    width: 34px;\n    float: right;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    color: white;\n    background-color: #f6c23e;\n    font-size: 10px;\n    bottom: 30px;\n    position: relative;\n    border-radius: 5px;\n}\n.search-icon:hover {\n    text-decoration: none;\n    background: #f0ad4e;\n    cursor: pointer;\n    color: #fff !important\n}\na:link {\n    text-decoration: none\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

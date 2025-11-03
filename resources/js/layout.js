@@ -4,7 +4,7 @@ window.loading = function (op) {
             effect: 'pulse',
             text: 'Cargando...',
             bg: 'rgba(255,255,255,0.6)',
-            color: '#007BFF'
+            color: '#f6c23e'
         });
     } else {
         $('body').waitMe('hide');

@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-center mb-3">
         <div class="search">
             <input type="text" class="search-input" placeholder="Buscar..." name="filterText" v-on:keypress.enter="search" v-model="filterText">
-            <a class="search-icon" v-on:click="search"><i class="fa fa-search"></i></a>
+            <a class="search-icon " v-on:click="search"><i class="fa fa-search"></i></a>
         </div>
     </div></template>
 <script>
@@ -50,7 +50,7 @@ export default {
     .search .search-input {
         padding: 0 10px;
         width: 100%;
-        caret-color: #536bf6;
+        caret-color: #f6c23e;
         font-size: 19px;
         font-weight: 300;
         color: black;
@@ -65,7 +65,7 @@ export default {
         justify-content: center;
         align-items: center;
         color: white;
-        background-color: #536bf6;
+        background-color: #f6c23e;
         font-size: 10px;
         bottom: 30px;
         position: relative;
@@ -74,7 +74,7 @@ export default {
 
     .search-icon:hover {
         text-decoration: none;
-        background: #3046ff;
+        background: #f0ad4e;
         cursor: pointer;
         color: #fff !important
     }

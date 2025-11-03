@@ -11,7 +11,7 @@
     @yield('inlineStyles')
     <script src="{{  asset('js/app.js') }}"></script>
 </head>
-<body  class="bg-gradient-primary">
+<body  class="bg-gradient-warning">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-12 col-md-9">
@@ -52,7 +52,7 @@
                                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                             @enderror
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                                        <button type="submit" class="btn btn-warning btn-user btn-block">Login</button>
                                     </form>
                                 </div>
                             </div>
