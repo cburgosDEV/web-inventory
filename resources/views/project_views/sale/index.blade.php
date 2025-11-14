@@ -45,10 +45,10 @@
             :modal-title="modalTitle"
             :button-title="buttonModalTitle"
             @button-action="save('store')">
-            <div class="form-row">
+            <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="idCustomer">Cliente:</label>
-                    <select class="custom-select my-1 mr-sm-2" id="idCustomer" v-model="viewModel.idCustomer">
+                    <select class="form-select my-1 mr-sm-2" id="idCustomer" v-model="viewModel.idCustomer">
                         <option value="null" selected disabled>Seleccionar cliente</option>
                         <option v-for="item in customersDropdown" :value="item.value">
                             @{{item.text}}
@@ -59,11 +59,11 @@
                 <div class="col-md-12">
                     <hr/>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-12 mb-3">
                     <label for="idProduct">Producto
                         (<span class="text-primary font-weight-bold">@{{viewModelDetail.unitSymbol}}</span>):
                     </label>
-                    <select class="custom-select" id="idProduct" v-model="viewModelDetail.idProduct" v-on:change="getDataProduct">
+                    <select class="form-select" id="idProduct" v-model="viewModelDetail.idProduct" v-on:change="getDataProduct">
                         <option value="undefined" selected disabled>Seleccionar producto</option>
                         <option v-for="item in productsDropdown" :value="item.value">
                             @{{item.text}}
@@ -73,21 +73,21 @@
                     <span v-if="showErrorListProduct" class="text-danger font-weight-light">*Agregar al menos un producto</span>
                     <span v-if="showError && validations.listDetail !== undefined" class="text-danger font-weight-light">@{{validations.listDetail[0]}}</span>
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="unitaryPrice">Precio
                         (<span v-if="viewModelDetail.idProduct!==undefined">P. min: <span class="text-primary font-weight-bold">@{{viewModelDetail.minPrice}}</span></span>):
                     </label>
                     <input type="number" class="form-control" id="unitaryPrice" v-model="viewModelDetail.unitaryPrice">
                     <span v-if="showErrorDetail && validationsDetail.unitaryPrice !== undefined" class="text-danger font-weight-light">@{{validationsDetail.unitaryPrice[0]}}</span>
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="quantity">Cantidad
                         (<span v-if="viewModelDetail.idProduct!==undefined">S. actual: <span :class="'font-weight-bold ' + [viewModelDetail.stock==='0.00'?'text-danger':'text-primary']">@{{viewModelDetail.stock}}</span></span>):
                     </label>
                     <input type="number" class="form-control" id="quantity" v-model="viewModelDetail.quantity">
                     <span v-if="showErrorDetail && validationsDetail.quantity !== undefined" class="text-danger font-weight-light">@{{validationsDetail.quantity[0]}}</span>
                 </div>
-                <div class="col-md-2 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="subTotal">Sub total:</label>
                     <input type="number" class="form-control" id="subTotal" v-model="subTotal" disabled>
                 </div>
@@ -124,7 +124,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th colspan="5" class="font-weight-bold text-right">Total:</th>
+                        <th colspan="5" class="font-weight-bold text-end">Total:</th>
                         <th>@{{totalPrice}}</th>
                         <th></th>
                     </tr>
@@ -156,7 +156,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="4" class="text-right">Total:</th>
+                    <th colspan="4" class="text-end">Total:</th>
                     <td>@{{saleDetail.totalPrice}}</td>
                 </tr>
                 </tfoot>

@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="role">Rol:</label>
-                            <select class="custom-select my-1 mr-sm-2" id="role" v-model="viewModel.role">
+                            <select class="form-select my-1 mr-sm-2" id="role" v-model="viewModel.role">
                                 <option value="" selected disabled>Seleccionar rol</option>
                                 <option value="admin">Administrador</option>
                                 <option value="seller">Vendedor</option>

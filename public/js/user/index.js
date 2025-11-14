@@ -46863,6 +46863,7 @@ var vue = new Vue({
   },
   data: {
     url: $('#baseUrl').val() + 'user',
+    errorCode: 'VALIDATION_ERROR',
     filterText: '',
     users: [],
     paginate: {},
@@ -46971,15 +46972,20 @@ var vue = new Vue({
       var url = this.url + "/store";
       if (this.imagePath.length > 0) this.viewModel.image = this.imagePath[0].path;
       loading(true);
-      console.log(this.viewModel);
       window.axios.post(url, this.viewModel).then(function (response) {
         _this4.switchResponseServer("store", response.data);
       })["catch"](function (error) {
+        var message = "";
         if (error.response.status === 422) {
-          _this4.showError = true;
           _this4.validations = error.response.data.errors;
+          _this4.showError = true;
+          message = 'Revisar los datos ingresados';
+        } else if (error.response.status === 500) {
+          message = error.response.data.message;
+        } else {
+          message = 'Ocurrió un error';
         }
-        showToast('error', 'Revisar los datos ingresados');
+        showToast('error', message);
       })["finally"](function (response) {
         loading(false);
       });

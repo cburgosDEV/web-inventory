@@ -18,7 +18,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SERCON</div>
+                <div class="sidebar-brand-text mx-3">SERCONI</div>
             </a>
             @role('admin')
                 <hr class="sidebar-divider my-0">
@@ -85,33 +85,28 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 text-warning">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <ul class="navbar-nav ml-auto">
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
-<!--                                <img class="img-profile rounded-circle" src="{{asset(Auth::user()->avatar)}}">-->
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
-{{--                                <a class="dropdown-item" href="#">--}}
-{{--                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>--}}
-{{--                                    Perfil--}}
-{{--                                </a>--}}
-{{--                                <div class="dropdown-divider"></div>--}}
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar sesión
+                    <div class="container-fluid">
+                        <h6 class="m-0">Fecha: {{ \Carbon\Carbon::now()->format('d/m/y') }}</h6>
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 text-warning">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <ul class="navbar-nav ml-auto">
+                            <div class="topbar-divider d-none d-sm-block"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
                                 </a>
-                                <form id="logout-form" action="{{ URL('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar sesión
+                                    </a>
+                                    <form id="logout-form" action="{{ URL('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
                 <div class="container-fluid">
                     <input type="hidden" name="baseUrl" id="baseUrl" value="{{ asset('')}}">
@@ -121,7 +116,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; 2021</span>
+                        <span>Copyright &copy; 2025</span>
                     </div>
                 </div>
             </footer>

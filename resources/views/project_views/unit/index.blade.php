@@ -43,7 +43,7 @@
             :modal-title="modalTitle"
             :button-title="buttonModalTitle"
             @button-action="save">
-            <div class="form-row">
+            <div class="row">
                 <div class="col-md-8 mb-3">
                     <label for="name">Unidad:</label>
                     <input type="text" class="form-control" id="name" v-model="viewModel.name">

@@ -53,14 +53,14 @@
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a :class="'nav-link' + [viewModel.idTypePerson === 1 ? ' active' : '']" id="pills-dni-tab"
-                           data-toggle="pill" href="#pills-dni"
+                           data-bs-toggle="pill" href="#pills-dni"
                            role="tab" aria-controls="pills-dni"
                            aria-selected="true"
                            v-on:click="clearForm(1)">Persona natural</a>
                     </li>
                     <li class="nav-item">
                         <a :class="'nav-link' + [viewModel.idTypePerson === 2 ? ' active' : '']" id="pills-ruc-tab"
-                           data-toggle="pill" href="#pills-ruc"
+                           data-bs-toggle="pill" href="#pills-ruc"
                            role="tab" aria-controls="pills-ruc"
                            aria-selected="false"
                            v-on:click="clearForm(2)">Persona jurídica</a>

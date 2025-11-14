@@ -45,10 +45,10 @@
             :modal-title="modalTitle"
             :button-title="buttonModalTitle"
             @button-action="save('store')">
-            <div class="form-row">
+            <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="idSupplier">Proveedor:</label>
-                    <select class="custom-select my-1 mr-sm-2" id="idSupplier" v-model="viewModel.idSupplier">
+                    <select class="form-select my-1 mr-sm-2" id="idSupplier" v-model="viewModel.idSupplier">
                         <option value="null" selected disabled>Seleccionar proveedor</option>
                         <option v-for="item in suppliersDropdown" :value="item.value">
                             @{{item.text}}
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="idProduct">Producto:</label>
-                    <select class="custom-select" id="idProduct" v-model="viewModelDetail.idProduct" v-on:change="getDataProduct">
+                    <select class="form-select" id="idProduct" v-model="viewModelDetail.idProduct" v-on:change="getDataProduct">
                         <option value="undefined" selected disabled>Seleccionar producto</option>
                         <option v-for="item in productsDropdown" :value="item.value">
                             @{{item.text}}
@@ -118,7 +118,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th colspan="5" class="font-weight-bold text-right">Total:</th>
+                        <th colspan="5" class="font-weight-bold text-end">Total:</th>
                         <th>S/. @{{totalPrice}}</th>
                         <th></th>
                     </tr>
@@ -150,7 +150,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="4" class="text-right">Total:</th>
+                    <th colspan="4" class="text-end">Total:</th>
                     <td>@{{purchaseDetail.totalPrice}}</td>
                 </tr>
                 </tfoot>

@@ -7,6 +7,7 @@ let vue = new Vue({
     },
     data: {
         url: $('#baseUrl').val() + 'user',
+        errorCode: 'VALIDATION_ERROR',
         filterText: '',
         users: [],
         paginate: {},
@@ -118,15 +119,20 @@ let vue = new Vue({
             let url = this.url + "/store";
             if(this.imagePath.length>0)this.viewModel.image = this.imagePath[0].path;
             loading(true);
-            console.log(this.viewModel);
             window.axios.post(url, this.viewModel).then((response) => {
                 this.switchResponseServer("store", response.data);
             }).catch((error) => {
+                let message = "";
                 if(error.response.status === 422){
-                    this.showError = true;
                     this.validations = error.response.data.errors;
+                    this.showError = true;
+                    message = 'Revisar los datos ingresados';
+                } else if (error.response.status === 500) {
+                    message = error.response.data.message;
+                } else {
+                    message = 'Ocurrió un error';
                 }
-                showToast('error', 'Revisar los datos ingresados');
+                showToast('error', message);
             }).finally((response) => {
                 loading(false);
             });

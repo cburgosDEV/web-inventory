@@ -5,7 +5,9 @@ namespace App\Architecture\Structure\Services;
 use App\Architecture\Helpers\StoreImageHelper;
 use App\Architecture\Mappers\UserMapper;
 use App\Architecture\Structure\Repositories\UserRepository;
+use App\Exceptions\CustomException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 
@@ -32,6 +34,8 @@ class UserService
 
     public function getById($id)
     {
+        Log::debug('Ingreso a metodo getById() en clase UserService - $id = '. $id);
+
         if($id == 0) return $this->userRepository->buildEmptyModel();
         $user = $this->userRepository->getById($id);
         $user->urlFirebase = $this->firebaseService->getImage($user->avatar);
@@ -40,6 +44,8 @@ class UserService
 
     public function getAllPaginateToIndex($filterText)
     {
+        Log::debug('Ingreso a metodo getAllPaginateToIndex() en clase UserService - $filterText = '. $filterText);
+
         $listUsers = $this->userRepository->getAllPaginateToIndex(10, $filterText);
         foreach($listUsers['model'] as $user) {
             $user->avatarUrl = $this->firebaseService->getImage($user->avatar);
@@ -50,20 +56,26 @@ class UserService
 
     public function store($request)
     {
+        Log::debug('Ingreso a metodo store() en clase UserService - $request = '. $request);
+
+        if ($request->get('id') == 1 && $request->get('state') == 0) {
+            Log::debug('Es Administrador del Sistema');
+            throw new CustomException('El Administrador del Sistema no puede ser eliminado', 'VALIDATION_ERROR', 500);
+        }
+
         if($request->get('id') == 0) {
             $model = $this->userMapper->objectRequestToModel($request->all());
             $model->assignRole(Role::findByName($request->get('role')));
 
             //SAVE IMAGE
-            if($request->get('image')!=null) {
+            if($request->get('image') != null) {
                 $image = $request->get('image');
                 $responseImage = $this->firebaseService->storeImage($image, "users/");
                 $model->avatar = $responseImage;
             }
 
             return $this->userRepository->store($model);
-        }
-        else {
+        } else {
             $model = $this->userRepository->getById($request->get('id'));
             $model->fill($request->all());
 

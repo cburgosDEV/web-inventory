@@ -47,7 +47,7 @@
             :modal-title="modalTitle"
             :button-title="buttonModalTitle"
             @button-action="save">
-            <div class="form-row">
+            <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="name">Producto: </label>
                     <input type="text" class="form-control" id="name" v-model="viewModel.name">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="idUnit">Unidad de medida:</label>
-                    <select class="custom-select my-1 mr-sm-2" id="idUnit" v-model="viewModel.idUnit">
+                    <select class="form-select my-1 mr-sm-2" id="idUnit" v-model="viewModel.idUnit">
                         <option value="0" selected disabled>Seleccionar unidad de medida</option>
                         <option v-for="item in dropdownUnit" :value="item.value">
                             @{{item.text}}
